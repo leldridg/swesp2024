@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+
+<body> 
+	<center><h1>This page demonstrates lists.</h1>
+	<ul>
+        <% books.forEach((book)=> { %>
+            <li>
+                <h2>
+                    <%= book.title %>
+                </h2>
+                <p>
+                    <%= book.author %>
+                </p>
+            </li>
+            <hr />
+        <% }) %>
+    </ul>
+	</center> 
+</body> 
+
+<%- include('../partials/foot') %>
