@@ -1,7 +1,6 @@
 {
-  "name": "InclassExamples",
+  "name": "swesp2024",
   "version": "1.0.0",
-  "description": "Tutorial Information",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

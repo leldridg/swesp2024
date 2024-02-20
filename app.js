@@ -12,13 +12,8 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')))
 
 // can do this instead of the above line
-console.log(app.use(express.static(path.join(__dirname, 'public'))))
+// console.log(app.use(express.static(path.join(__dirname, 'public'))))
 
-const user = {
-	name: `Dr. Horn`,
-	favorite_color: `green`,
-	isGreatestTeacher: true
-}
 
 app.get("/", function (req, res) {
 	// res.render(`pages/home`);
@@ -28,6 +23,6 @@ app.get("/", function (req, res) {
 
 
 app.listen(port, function () {
-	console.log(`Example EJS Intro app listening on port ${port}!`);
+	console.log(`SWE SP 2024 app listening on port  ${port}!`);
 });
 
