@@ -21,6 +21,11 @@ app.get("/", function (req, res) {
 
 });
 
+app.get("/login", function (req, res) {
+
+	res.render('pages/login', {});
+});
+
 
 app.listen(port, function () {
 	console.log(`SWE SP 2024 app listening on port  ${port}!`);
