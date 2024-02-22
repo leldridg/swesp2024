@@ -1,0 +1,18 @@
+.container {
+    position: relative; /* This makes it a reference for absolutely positioned children */
+}
+
+.top-left-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.underline {
+    position: absolute;
+    left: 0;
+    top: 100%; /* This positions the line right under the image */
+    width: 100%; /* Adjust the width as needed */
+    height: 2px; /* Height of the line */
+    background-color: #000; /* Color of the line */
+}
