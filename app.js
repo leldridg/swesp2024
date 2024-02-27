@@ -17,8 +17,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.get("/", function (req, res) {
 	// res.render(`pages/home`);
-	res.render('pages/home', { title: 'Home Page', message: 'Welcome to my INDEX Express app!' });
+	res.render('pages/home', { title: 'Home Page', message: 'Welcome to my INDEX Express app!'});
 
+});
+
+app.get("/login", function (req, res) {
+
+	res.render('pages/login', {});
 });
 
 

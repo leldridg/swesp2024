@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../partials/head') %>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <link rel='stylesheet' href='/stylesheets/login.css' />
+    <title>Login</title>
+
+    
+</head>
+<body>
+    <div class="loginBox">
+        <form action="" method="post">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="input-field" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="input-field" placeholder="Password" required>
+            </div>
+            <input type="submit" class="submit-btn" value="Log In">
+        </form>
+    </div>
+</body>
+</html>
