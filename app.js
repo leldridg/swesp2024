@@ -1,4 +1,6 @@
 const express = require("express");
+
+const login = require("./routes/login.js");
 const app = express();
 
 const bodyParser = require('body-parser')
@@ -21,10 +23,14 @@ app.get("/", function (req, res) {
 
 });
 
-app.get("/login", function (req, res) {
+// app.get("/login", function (req, res) {
 
-	res.render('pages/login', {});
-});
+// 	res.render('pages/login', {});
+// });
+
+app.use("/login", login);
+
+
 
 
 app.listen(port, function () {
