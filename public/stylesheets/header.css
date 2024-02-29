@@ -1,18 +1,43 @@
-.container {
-    position: relative; /* This makes it a reference for absolutely positioned children */
+/* Ensure body has no margin to start with so everything aligns to the top */
+body, html {
+    margin: 0;
+    padding: 0;
 }
 
-.top-left-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    width: 100%; /* Ensure the header spans the full width */
 }
 
-.underline {
-    position: absolute;
-    left: 0;
-    top: 100%; /* This positions the line right under the image */
-    width: 100%; /* Adjust the width as needed */
-    height: 2px; /* Height of the line */
-    background-color: #000; /* Color of the line */
+.logo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo img {
+    height: 50px; /* Adjust based on your logo size */
+}
+
+.user-navigation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.user-navigation a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.user-navigation .cart img{
+    height: 30px;
 }

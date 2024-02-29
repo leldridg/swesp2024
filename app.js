@@ -2,6 +2,7 @@ const express = require("express");
 
 const home = require("./routes/home.js");
 const login = require("./routes/login.js");
+const createAccount = require("./routes/createAccount.js");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use("/", home);
 app.use("/login", login);
+app.use("/create-account", createAccount);
 
 
 
