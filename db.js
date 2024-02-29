@@ -6,7 +6,7 @@ const pool = new Pool({
 	host : 'localhost',
 	user : 'postgres',
 	password : '1234',
-	database : 'petstoredb',
+	database : 'PetStoreDB',
     port: 5432 // Default port for PostgreSQL
 });
 
