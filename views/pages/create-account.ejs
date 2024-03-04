@@ -6,7 +6,15 @@
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
   <link rel='stylesheet' href='/stylesheets/createAccount.css' />
   <title>Create Account</title>
+  
 </head>
+
+<% if (taken) { %>
+  <div>
+    <p> this username is already taken </p>
+  </div>
+
+<% } %>
 
 <body>
   <div class="login-container">

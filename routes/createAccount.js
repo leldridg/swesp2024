@@ -4,22 +4,25 @@ var router = express.Router();
 const queries = require('../database/queries');
 
 router.get('/', function (req, res, next) {
-  res.render('pages/create-account');
+  res.render('pages/create-account', { taken: false } );
 });
 
 router.post('/', function(req, res) {
 
   const { username, password } = req.body; // Extracting username and password from the form submission
 
+  // query for if username is already taken
   queries.accountTaken(username, (err, taken) => {
     if (err) {
       console.error(err);
     }
 
     if(taken){  
-      res.send('Username already taken');
+      // res.send('Username already taken');
+      res.render('pages/create-account', {taken: true});
     } else {
-  
+      
+      // query to add a new user to the database
       queries.createAccount(username, password, (err, success) => {
         if (err) {
           console.error(err);
