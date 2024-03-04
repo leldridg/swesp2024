@@ -7,18 +7,18 @@ const db = require('../db.js'); // Adjust the path as necessary
 router.get('/', function (req, res, next) {
 
   let sql = `
-  SELECT *
-  FROM product, category, product_category
-  WHERE category.name = 'food'
-    AND product.product_id = product_category.product_id
-    AND product_category.category_id = category.category_id
-  `
+    SELECT *
+    FROM product;
+
+    `
 
   db.query(sql, (err, result) => {
     if (err) throw err;
     console.log(result);
 
-    res.render('pages/home', { title: 'Home Page', message: 'Welcome to my INDEX Express app!' });
+
+
+    res.render('pages/home', { title: "home!", items: result.rows});
   });
 });
 
