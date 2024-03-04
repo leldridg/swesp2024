@@ -39,5 +39,22 @@ function createAccount(username, password, callback) {
   });
 }
 
+function accountTaken(username, callback) {
+  let sql =
+  `
+  SELECT username 
+  FROM account 
+  WHERE username = '${username}';
+  `
+  db.query(sql, (err, result) => {
+    if (err) {
+      return callback(err, null);
+    }
 
-module.exports = { fetchProducts, createAccount };
+
+    callback(null, result.rows.length > 0);
+  });
+}
+
+
+module.exports = { fetchProducts, createAccount, accountTaken};

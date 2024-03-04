@@ -11,13 +11,26 @@ router.post('/', function(req, res) {
 
   const { username, password } = req.body; // Extracting username and password from the form submission
 
-  queries.createAccount(username, password, (err, success) => {
+  queries.accountTaken(username, (err, taken) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('An error occurred');
     }
-    res.send('Account created successfully');
-  });
+
+    if(taken){  
+      res.send('Username already taken');
+    } else {
+  
+      queries.createAccount(username, password, (err, success) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('An error occurred');
+        }
+        res.send('Account created successfully');
+      });
+    }
+
+  })
+
 
 });
 
