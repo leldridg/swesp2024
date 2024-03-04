@@ -25,9 +25,22 @@ function fetchProducts(callback) {
   });
 }
 
-function createAccount(){
-  
+function createAccount(username, password, callback) {
+  let sql =
+    `
+    INSERT INTO account (username, password, is_admin, login_time) VALUES ('${username}', '${password}', FALSE, NOW());
+    `
+   // 
+
+  console.log(sql);
+
+  db.query(sql, (err, result) => {
+    if(err){
+      return callback(err, null);
+    }
+    callback(null,)
+  });
 }
 
 
-module.exports = { fetchProducts };
+module.exports = { fetchProducts, createAccount };
