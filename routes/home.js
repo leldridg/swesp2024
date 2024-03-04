@@ -8,18 +8,18 @@ router.get('/', function (req, res, next) {
 
   let sql = `
   SELECT *
-  FROM product  
-  WHERE name ILIKE 'Experimental Food';
+  FROM product, category, product_category
+  WHERE category.name = 'food'
+    AND product.product_id = product_category.product_id
+    AND product_category.category_id = category.category_id
   `
 
   db.query(sql, (err, result) => {
     if (err) throw err;
-
     console.log(result);
-    
+
     res.render('pages/home', { title: 'Home Page', message: 'Welcome to my INDEX Express app!' });
   });
-
 });
 
 module.exports = router;
