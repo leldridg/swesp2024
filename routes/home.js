@@ -6,9 +6,11 @@ const db = require('../db.js'); // Adjust the path as necessary
 
 router.get('/', function (req, res, next) {
 
-  let sql = `SELECT username, password 
-			FROM account 
-			WHERE username = 'test' AND password = 'password'`;
+  let sql = `
+  SELECT *
+  FROM product  
+  WHERE name ILIKE 'Experimental Food';
+  `
 
   db.query(sql, (err, result) => {
     if (err) throw err;
