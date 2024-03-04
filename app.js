@@ -21,6 +21,5 @@ app.use("/login", login);
 
 app.listen(port, function () {
 	console.log(`SWE SP 2024 app listening on port  ${port}!`);
-	// db.query('SELECT *');
 });
 
