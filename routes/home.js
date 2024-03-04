@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 
   let sql = `SELECT username, password 
 			FROM account 
-			WHERE username = 'admn' AND password = 'password'`;
+			WHERE username = 'admin' AND password = 'password'`;
 
   db.query(sql, (err, result) => {
     if (err) throw err;
