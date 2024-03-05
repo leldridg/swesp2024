@@ -56,5 +56,24 @@ function accountTaken(username, callback) {
   });
 }
 
+function loginValid(username, password, callback) {
+  let sql =
+  `
+  SELECT username, password
+  FROM account 
+  
+  WHERE username = '${username}' AND password = '${password}';
+  `
+  
+  db.query(sql, (err, result) => {
+    if (err) {
+      return callback(err, null);
+    }
 
-module.exports = { fetchProducts, createAccount, accountTaken};
+
+    callback(null, result.rows.length > 0);
+  });
+}
+
+
+module.exports = { fetchProducts, createAccount, accountTaken, loginValid};
