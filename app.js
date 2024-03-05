@@ -1,28 +1,41 @@
 const express = require("express");
+
+const home = require("./routes/home.js");
+const login = require("./routes/login.js");
+const createAccount = require("./routes/createAccount.js");
+const checkout = require("./routes/checkout.js");
+// UNIMPLEMENTED
+const addProduct = require("./routes/addProduct.js");
+const editProduct = require("./routes/editProduct.js");
+const viewProduct = require("./routes/viewProduct.js");
+const shoppingCart = require("./routes/shoppingCart.js");
+
+
+const db = require('./database/db.js'); // Adjust the path as necessary
+
 const app = express();
 
-const bodyParser = require('body-parser')
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 const port = 3000;
 
 const path = require('path');
- 
-// Static Middleware
+
 app.use(express.static(path.join(__dirname, 'public')))
 
-// can do this instead of the above line
-// console.log(app.use(express.static(path.join(__dirname, 'public'))))
 
+app.use("/", home);
+app.use("/login", login);
 
-app.get("/", function (req, res) {
-	// res.render(`pages/home`);
-	res.render('pages/home', { title: 'Home Page', message: 'Welcome to my INDEX Express app!' });
-
-});
-
+app.use("/create-account", createAccount);
+app.use("/checkout", checkout);
+// UNIMPLEMENTED
+app.use("/add-product", addProduct);
+app.use("/view-product", viewProduct);
+app.use("/edit-product", editProduct);
+app.use("/cart", shoppingCart);
 
 app.listen(port, function () {
-	console.log(`SWE SP 2024 app listening on port  ${port}!`);
+  console.log(`SWE SP 2024 app listening on port  ${port}!`);
 });
 

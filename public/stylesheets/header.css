@@ -1,0 +1,43 @@
+/* Ensure body has no margin to start with so everything aligns to the top */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    width: 100%; /* Ensure the header spans the full width */
+}
+
+.logo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo img {
+    height: 50px; /* Adjust based on your logo size */
+}
+
+.user-navigation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.user-navigation a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.user-navigation .cart img{
+    height: 30px;
+}

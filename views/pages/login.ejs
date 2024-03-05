@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+        <link rel='stylesheet' href='/stylesheets/login.css' />
+        <title>Login</title>
+    </head>
+
+    <body>
+        <div class="login-container">
+            <form class="login-form" action="/login" method="post">
+                <div class="input-group">
+                    <label for="username">username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-button">Log In!</button>
+                <div class="signup-link">
+                    <p>don't have an account? <a href="/create-account" class="create-account-link">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
