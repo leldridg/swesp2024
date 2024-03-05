@@ -10,7 +10,8 @@ router.get('/', function (req, res, next) {
       console.error(err);
       return res.status(500).send('An error occurred');
     }
-    res.render('pages/home', { title: "Home!", items: items });
+    
+    res.render('pages/home', { title: req.query.session, items: items });
   });
 
 });
