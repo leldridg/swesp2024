@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
 
     if(taken){  
       // res.send('Username already taken');
-      res.render('pages/create-account', {taken: true});
+      res.render('pages/create-account', {taken: true, password: password});
     } else {
       
       // query to add a new user to the database
