@@ -87,9 +87,6 @@ function idByUsername(username, callback){
     if (err) {
       return callback(err, null);
     }
-
-    console.log(result);
-
     callback(null, result.rows[0]);
   });
 }
@@ -118,7 +115,6 @@ function checkTokenUnique(session_id, callback) {
   `
   
   db.query(sql, (err, result) => {
-
     if (err) {
       return callback(err, null);
     }
@@ -132,7 +128,7 @@ function insertToken(session_id, user_id, callback){
     `
     INSERT INTO session (session_id, user_id)
 
-    VALUES ('${session_id}', '${user_id}', NOW());
+    VALUES ('${session_id}', '${user_id}');
     `
   db.query(sql, (err) => {
     if(err){

@@ -34,6 +34,21 @@
   <% } %>
 
   <img src="/images/cow.gif">
+
+  <script>
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+    const sessionValue = getQueryParam('session');
+
+    if (sessionValue) {
+        console.log('Session:', sessionValue);
+    } else {
+        console.log('Session parameter not found in the URL.');
+    }
+</script>
+
 </body>
 
 </html>
