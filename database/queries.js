@@ -94,18 +94,16 @@ function idByUsername(username, callback){
   });
 }
 
-function removeToken(username, callback){
+function removeToken(user_id, callback){
   let sql =
   `
   DELETE FROM session
   WHERE user_id = '${user_id}'
   `
-  
   db.query(sql, (err) => {
     if (err) {
-      return callback(err, null);
+      return callback(err);
     }
-
   });
 }
 
@@ -128,4 +126,19 @@ function checkTokenUnique(session_id, callback) {
   });
 }
 
-module.exports = { fetchProducts, createAccount, accountTaken, loginValid, idByUsername, removeToken, checkTokenUnique};
+
+function insertToken(session_id, user_id, callback){
+  let sql =
+    `
+    INSERT INTO session (session_id, user_id)
+
+    VALUES ('${session_id}', '${user_id}', NOW());
+    `
+  db.query(sql, (err) => {
+    if(err){
+      return callback(err, null);
+    }
+    callback(null)
+  });
+}
+module.exports = { fetchProducts, createAccount, accountTaken, loginValid, idByUsername, removeToken, checkTokenUnique, insertToken};

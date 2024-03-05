@@ -13,9 +13,7 @@ router.post('/', function(req, res) {
 
   // query for if username is already taken
   queries.accountTaken(username, (err, taken) => {
-    if (err) {
-      console.error(err);
-    }
+    if(err) { console.log(err); }
 
     if(taken){  
       // res.send('Username already taken');
