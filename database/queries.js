@@ -70,10 +70,62 @@ function loginValid(username, password, callback) {
       return callback(err, null);
     }
 
-
     callback(null, result.rows.length > 0);
   });
 }
 
+function idByUsername(username, callback){
+  let sql = 
+  `
+  SELECT user_id
+  FROM account 
+  
+  WHERE username = '${username}';
+  `
+  
+  db.query(sql, (err, result) => {
+    if (err) {
+      return callback(err, null);
+    }
 
-module.exports = { fetchProducts, createAccount, accountTaken, loginValid};
+    console.log(result);
+
+    callback(null, result.rows[0]);
+  });
+}
+
+function removeToken(username, callback){
+  let sql =
+  `
+  DELETE FROM session
+  WHERE user_id = '${user_id}'
+  `
+  
+  db.query(sql, (err) => {
+    if (err) {
+      return callback(err, null);
+    }
+
+  });
+}
+
+
+function checkTokenUnique(session_id, callback) {
+  let sql =
+  `
+  SELECT session_id
+  FROM session 
+  
+  WHERE session_id = '${session_id}';
+  `
+  
+  db.query(sql, (err, result) => {
+
+    if (err) {
+      return callback(err, null);
+    }
+    callback(null, result.rows.length == 0);
+  });
+}
+
+module.exports = { fetchProducts, createAccount, accountTaken, loginValid, idByUsername, removeToken, checkTokenUnique};
