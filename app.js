@@ -11,7 +11,7 @@ const viewProduct = require("./routes/viewProduct.js");
 const shoppingCart = require("./routes/shoppingCart.js");
 
 
-const db = require('./db.js');
+const db = require('./database/db.js'); // Adjust the path as necessary
 
 const app = express();
 
@@ -36,6 +36,6 @@ app.use("/edit-product", editProduct);
 app.use("/cart", shoppingCart);
 
 app.listen(port, function () {
-	console.log(`SWE SP 2024 app listening on port  ${port}!`);
+  console.log(`SWE SP 2024 app listening on port  ${port}!`);
 });
 
