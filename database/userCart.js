@@ -3,29 +3,41 @@ const queries = require('../database/queries');
 
 function getUserCart(user_id, callback) {
   queries.cartItemsbyUID(user_id, (err,cartItems) => {
+    if (err) {
+      return callback(err);
+    }
 
-    let arr = [];
+    if (cartItems.length === 0) {
+      // Handle empty cart scenario
+      return callback(null, []);
+    }
+
+    let items = [];
     let completedRequests = 0;
+    let hasErrorOccurred = false;
 
-    console.log(cartItems);
-  
+    cartItems.forEach((item, index) => {
+      queries.productInfoFromPID(item.product_id, (err, description) => {
+        if (hasErrorOccurred) {
+          return;
+        }
 
-      cartItems.array.forEach((item, index) => {
-        queries.productInfoFromPID(item.product_id, (err, description) => {
-          arr[index] = description.rows; // Use index to maintain order
-          console.log(description);
+        if (err) {
+          hasErrorOccurred = true;
+          return callback(err);
+        }
 
-        });
+        items[index] = description; // Use index to maintain order
         completedRequests++;
 
         if (completedRequests === cartItems.length) {
           // All requests have completed successfully
-          callback(null, arr);
+          console.log(items);
+          callback(null, items);
         }
-
+      });
     });
-});
-
-};
+  });
+}
 
 module.exports = { getUserCart }

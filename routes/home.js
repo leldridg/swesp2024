@@ -18,10 +18,10 @@ router.get('/', async function (req, res, next) {
 
       if(exists){
         queries.usernameByUID(user_id, (err,username) => {
-
-          res.render('pages/home', { title: `welcome ${username}`, items: null});
-
-
+          userCart.getUserCart(user_id, (err, items) => {
+            
+            res.render('pages/home', { title: `welcome ${username}`, items: items});
+          });
         });
       } else {
         console.log("invalid session token");

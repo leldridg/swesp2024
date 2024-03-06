@@ -181,8 +181,7 @@ function productInfoFromPID(product_id, callback) {
   `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null); }
-    console.log(result)
-    callback(null, result);
+    callback(null, result.rows[0]);
   });
 }
 
