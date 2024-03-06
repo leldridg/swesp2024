@@ -2,14 +2,19 @@
 var express = require('express');
 var router = express.Router();
 
-const mid = require('../database/middleware.js');
+const queries = require('../database/queries');
+
 
 router.get('/', async function (req, res, next) {
 
-  var uid = await mid.userIDfromSession(req.query.session)
+  queries.userIDfromSession(req.query.session, (err, result) => {
+    if(err) { console.log(err); }
+    
 
-  console.log(uid);
-  res.render('pages/home', { title: uid, items: null});
+    res.render('pages/home', { title: result.rows[0].user_id, items: null});
+
+  });
+
 
 });
 

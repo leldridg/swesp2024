@@ -138,22 +138,20 @@ function insertToken(session_id, user_id, callback){
   });
 }
 
-async function userIDfromSession(session_id) {
-  return new Promise((resolve, reject) => {
-     let sql = `
-       SELECT user_id
-       FROM session
-     `;
- 
-     db.query(sql, (err, result) => {
-       if (err) {
-         return reject(err);
-       }
-       return resolve(result);
-     });
+function userIDfromSession(session_id, callback) {
+  let sql = `
+    SELECT user_id
+    FROM session
+
+    WHERE session_id = '${session_id}';
+  `
+  db.query(sql, (err, result) => {
+    if (err) {
+      return callback(err, null);
+    }
+    console.log(result.rows)
+    callback(null, result);
   });
  }
  
 module.exports = { fetchProducts, createAccount, accountTaken, loginValid, idByUsername, removeToken, checkTokenUnique, insertToken, userIDfromSession};
-
-//        -- WHERE session_id = '${session_id}';
