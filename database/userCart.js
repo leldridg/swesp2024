@@ -33,7 +33,6 @@ function getUserCart(user_id, callback) {
 
         if (completedRequests === cartItems.length) {
           // All requests have completed successfully
-          console.log(items);
           callback(null, items);
         }
       });
