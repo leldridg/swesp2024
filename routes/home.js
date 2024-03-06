@@ -19,7 +19,7 @@ router.get('/', async function (req, res, next) {
       if(exists){
         queries.usernameByUID(user_id, (err,username) => {
           userCart.getUserCart(user_id, (err, items) => {
-            
+
             res.render('pages/home', { title: `welcome ${username}`, items: items});
           });
         });

@@ -17,7 +17,7 @@ function getUserCart(user_id, callback) {
     let hasErrorOccurred = false;
 
     cartItems.forEach((item, index) => {
-      queries.productInfoFromPID(item.product_id, (err, description) => {
+      queries.productInfoFromPID(item.product_id, (err, value) => {
         if (hasErrorOccurred) {
           return;
         }
@@ -26,8 +26,9 @@ function getUserCart(user_id, callback) {
           hasErrorOccurred = true;
           return callback(err);
         }
+        value.quantity = item.quantity;
 
-        items[index] = description; // Use index to maintain order
+        items[index] = value; // Use index to maintain order
         completedRequests++;
 
         if (completedRequests === cartItems.length) {
