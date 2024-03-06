@@ -12,13 +12,16 @@ router.get('/', async function (req, res, next) {
   if(Object.keys(req.query).length === 0){
     res.render('pages/home', { title: 'home, no token!', items: null});
   } else {
-    queries.userIDfromSession(req.query.session, (err, result) => {
+    queries.uidFromSID(req.query.session, (err, exists, user_id) => {
       if (err) { return next(err); }
-      if(result.rows.length == 0){
+
+      if(exists){
+        queries.usernameByUID(user_id, (err,username) => {
+          res.render('pages/home', { title: `welcome ${username}`, items: null});
+        });
+      } else {
         console.log("invalid session token");
         res.send("invalid session token ):");
-      } else {
-        res.render('pages/home', { title: result.rows[0].user_id, items: null});
       }
     });
   }

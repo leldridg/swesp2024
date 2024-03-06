@@ -3,6 +3,9 @@ var express = require('express');
 var router = express.Router();
 const queries = require('../database/queries');
 
+const generator = require('../database/generateToken');
+
+
 router.get('/', function (req, res, next) {
   res.render('pages/create-account', { taken: false } );
 });
@@ -19,12 +22,14 @@ router.post('/', function(req, res, next) { // Include 'next' in the function pa
       res.render('pages/create-account', {taken: true, password: password});
     } else {
       
-      // Query to add a new user to the database
       queries.createAccount(username, password, (err, success) => {
         if (err) { return next(err); }
         // If the account is successfully created, send a success message
-        res.send('Account created successfully');
-        // will need to create a session token and login and such
+        generator.generateToken(username, (err, token) => {
+          if (err) { console.log(err); }
+
+          res.redirect(`/?session=${token}`);
+        });
       });
     }
   });

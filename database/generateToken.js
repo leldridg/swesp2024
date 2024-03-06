@@ -2,7 +2,7 @@ const queries = require('../database/queries');
 
 function generateToken(username, callback) {
 
-  queries.idByUsername(username, (err, result) => {
+  queries.idByUsername(username, (err, user_id) => {
     if (err) { return callback(err, null)}
 
     const generateRandomAlphanumeric = length => Array.from({ length }, () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(Math.random() * 62))).join('');
@@ -10,7 +10,7 @@ function generateToken(username, callback) {
     let sess = generateRandomAlphanumeric(20);
 
     // remove the token if it exists
-    queries.removeToken(result.user_id, (err) => {
+    queries.removeToken(user_id, (err) => {
       if (err) { return callback(err, null)}
     });
 
@@ -19,7 +19,7 @@ function generateToken(username, callback) {
       if (err) { return callback(err, null)}
       if (valid) {
 
-        queries.insertToken(sess, result.user_id, (err) => {
+        queries.insertToken(sess, user_id, (err) => {
           if (err) { console.log(err); }
         });
         console.log(`/?session=${sess}`);
