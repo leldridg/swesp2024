@@ -17,6 +17,7 @@ router.get('/', async function (req, res, next) {
       if (err) { return next(err); }
 
       if(exists){
+        // gets username and cart items
         queries.usernameByUID(user_id, (err,username) => {
           userCart.getUserCart(user_id, (err, items) => {
 

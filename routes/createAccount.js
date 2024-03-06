@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) { // Include 'next' in the function pa
         if (err) { return next(err); }
         // If the account is successfully created, send a success message
         generator.generateToken(username, (err, token) => {
-          if (err) { console.log(err); }
+          if (err) { return next(err) }
 
           res.redirect(`/?session=${token}`);
         });
