@@ -149,7 +149,6 @@ function userIDfromSession(session_id, callback) {
     if (err) {
       return callback(err, null);
     }
-    console.log(result.rows)
     callback(null, result);
   });
  }
