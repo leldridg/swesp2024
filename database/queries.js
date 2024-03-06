@@ -10,6 +10,7 @@
 
 const db = require('../database/db.js'); // Adjust the path as necessary
 
+// grabs all products from the table
 function fetchProducts(callback) {
   let sql =
     `
@@ -21,7 +22,8 @@ function fetchProducts(callback) {
     callback(null, result.rows);
   });
 }
-
+//takes: username, password
+//returns: null (inserts account into table)
 function createAccount(username, password, callback) {
   let sql =
     `
@@ -85,6 +87,8 @@ async function idByUsername(username, callback) {
   });
 }
 
+// takes: user_id
+// returns: null (remove all session_id table entries where the token is present)
 function removeToken(user_id, callback) {
   let sql =
     `
@@ -96,7 +100,8 @@ function removeToken(user_id, callback) {
   });
 }
 
-
+// takes: session_id
+// returns: boolean (has the session id already been used)
 function checkTokenUnique(session_id, callback) {
   let sql =
     `
@@ -112,7 +117,8 @@ function checkTokenUnique(session_id, callback) {
   });
 }
 
-
+// takes: session_id, user_id
+// returns: null (inserts the token and user into the table)
 function insertToken(session_id, user_id, callback) {
   let sql =
     `
@@ -126,6 +132,8 @@ function insertToken(session_id, user_id, callback) {
   });
 }
 
+// takes: session_id
+// returns: user_id
 function uidFromSID(session_id, callback) {
   let sql = `
     SELECT user_id
@@ -142,6 +150,8 @@ function uidFromSID(session_id, callback) {
   });
 }
 
+// takes: user_id
+// returns: username
 function usernameByUID(user_id, callback) {
   let sql = `
     SELECT user_id, profile_img, username
@@ -158,7 +168,8 @@ function usernameByUID(user_id, callback) {
   });
 }
 
-//
+// takes: uid
+// returns: cart items
 function cartItemsbyUID(user_id, callback) {
   let sql = `
     SELECT item_id, product_id, quantity
@@ -172,6 +183,8 @@ function cartItemsbyUID(user_id, callback) {
   });
 }
 
+// takes: product_id
+// returns: product info
 function productInfoFromPID(product_id, callback) {
   let sql = `
     SELECT name, price, description

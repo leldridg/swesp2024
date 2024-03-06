@@ -1,7 +1,10 @@
 const queries = require('../database/queries');
 
-function generateToken(username, callback) {
 
+// this function takes a username and generates a session_id for this user.
+// inserts into table the session_id and user_id
+
+function generateToken(username, callback) {
   queries.idByUsername(username, (err, user_id) => {
     if (err) { return callback(err, null)}
 
