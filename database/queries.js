@@ -18,9 +18,7 @@ function fetchProducts(callback) {
     FROM product;
     `
   db.query(sql, (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err, null); }
     callback(null, result.rows);
   });
 }
@@ -32,9 +30,7 @@ function createAccount(username, password, callback) {
     VALUES ('${username}', '${password}', FALSE, NOW());
     `
   db.query(sql, (err, result) => {
-    if(err){
-      return callback(err, null);
-    }
+    if(err){ return callback(err, null); }
     callback(null)
   });
 }
@@ -47,10 +43,7 @@ function accountTaken(username, callback) {
   WHERE username = '${username}';
   `
   db.query(sql, (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
-
+    if (err) { return callback(err, null); }
 
     callback(null, result.rows.length > 0);
   });
@@ -66,9 +59,7 @@ function loginValid(username, password, callback) {
   `
   
   db.query(sql, (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err, null); }
 
     callback(null, result.rows.length > 0);
   });
@@ -84,9 +75,7 @@ async function idByUsername(username, callback){
   `
   
   db.query(sql, (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err, null); }
     callback(null, result.rows[0]);
   });
 }
@@ -98,9 +87,7 @@ function removeToken(user_id, callback){
   WHERE user_id = '${user_id}'
   `
   db.query(sql, (err) => {
-    if (err) {
-      return callback(err);
-    }
+    if (err) { return callback(err); }
   });
 }
 
@@ -115,9 +102,7 @@ function checkTokenUnique(session_id, callback) {
   `
   
   db.query(sql, (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err, null); }
     callback(null, result.rows.length == 0);
   });
 }
@@ -131,9 +116,7 @@ function insertToken(session_id, user_id, callback){
     VALUES ('${session_id}', '${user_id}');
     `
   db.query(sql, (err) => {
-    if(err){
-      return callback(err, null);
-    }
+    if(err){ return callback(err, null); }
     callback(null)
   });
 }
@@ -146,9 +129,8 @@ function userIDfromSession(session_id, callback) {
     WHERE session_id = '${session_id}';
   `
   db.query(sql, (err, result) => {
-    if (err) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err, null); }
+    console.log(result.rows)
     callback(null, result);
   });
  }
