@@ -158,6 +158,7 @@ function usernameByUID(user_id, callback) {
   });
 }
 
+//
 function cartItemsbyUID(user_id, callback) {
   let sql = `
     SELECT item_id, product_id, quantity
@@ -167,10 +168,23 @@ function cartItemsbyUID(user_id, callback) {
   `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null); }
-    callback(null, result);
+    callback(null, result.rows);
   });
 }
 
+function productInfoFromPID(product_id, callback) {
+  let sql = `
+    SELECT name, price, description
+    FROM product
+
+    WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err, null); }
+    console.log(result)
+    callback(null, result);
+  });
+}
 
 module.exports = {
   fetchProducts,
@@ -183,5 +197,6 @@ module.exports = {
   insertToken,
   uidFromSID,
   usernameByUID,
-  cartItemsbyUID
+  cartItemsbyUID,
+  productInfoFromPID
 };

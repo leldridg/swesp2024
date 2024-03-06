@@ -4,6 +4,7 @@ var router = express.Router();
 
 const queries = require('../database/queries');
 
+const userCart = require('../database/userCart');
 
 router.get('/', async function (req, res, next) {
 
@@ -17,7 +18,10 @@ router.get('/', async function (req, res, next) {
 
       if(exists){
         queries.usernameByUID(user_id, (err,username) => {
+
           res.render('pages/home', { title: `welcome ${username}`, items: null});
+
+
         });
       } else {
         console.log("invalid session token");
