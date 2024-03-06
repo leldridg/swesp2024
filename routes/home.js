@@ -1,18 +1,15 @@
 
 var express = require('express');
 var router = express.Router();
-const queries = require('../database/queries');
 
-router.get('/', function (req, res, next) {
+const mid = require('../database/middleware.js');
 
-  queries.fetchProducts((err, items) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('An error occurred');
-    }
-    
-    res.render('pages/home', { title: req.query.session, items: items });
-  });
+router.get('/', async function (req, res, next) {
+
+  var uid = await mid.userIDfromSession(req.query.session)
+
+  console.log(uid);
+  res.render('pages/home', { title: uid, items: null});
 
 });
 

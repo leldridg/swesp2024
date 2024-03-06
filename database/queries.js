@@ -74,7 +74,7 @@ function loginValid(username, password, callback) {
   });
 }
 
-function idByUsername(username, callback){
+async function idByUsername(username, callback){
   let sql = 
   `
   SELECT user_id
@@ -137,4 +137,23 @@ function insertToken(session_id, user_id, callback){
     callback(null)
   });
 }
-module.exports = { fetchProducts, createAccount, accountTaken, loginValid, idByUsername, removeToken, checkTokenUnique, insertToken};
+
+async function userIDfromSession(session_id) {
+  return new Promise((resolve, reject) => {
+     let sql = `
+       SELECT user_id
+       FROM session
+     `;
+ 
+     db.query(sql, (err, result) => {
+       if (err) {
+         return reject(err);
+       }
+       return resolve(result);
+     });
+  });
+ }
+ 
+module.exports = { fetchProducts, createAccount, accountTaken, loginValid, idByUsername, removeToken, checkTokenUnique, insertToken, userIDfromSession};
+
+//        -- WHERE session_id = '${session_id}';
