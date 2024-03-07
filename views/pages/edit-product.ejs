@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <title>Checkout</title>
-    </head>
-    <body>
-        <p>this is my edit product page, normies STAY OUT!!!</p>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product</title>
+  <link rel="stylesheet" href="/stylesheets/editProduct.css">
+</head>
+<body>
+  <div class="edit-product-container">
+    <div class="product-image">
+      <img src="/images/logo.png" alt="Product Image">
+    </div>
+    <div class="product-info">
+      <h1>Product Name</h1>
+      <p class="price">$19.99</p>
+      <div class="quantity-editor">
+        <label for="quantity">Qty:</label>
+        <input type="number" id="quantity" name="quantity" value="1">
+      </div>
+      <button class="btn save-changes">Save Changes</button>
+      <button class="btn delete-product">Delete Product</button>
+    </div>
+    <div class="product-description">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
+  </div>
+</body>
 </html>
