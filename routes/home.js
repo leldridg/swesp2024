@@ -11,7 +11,7 @@ router.get('/', async function (req, res, next) {
   console.log(req.query);
 
   if(Object.keys(req.query).length === 0){
-    res.render('pages/home', { title: 'home, no token!', items: null});
+    res.render('pages/home', { title: 'welcome, guest user!', items: null});
   } else {
     queries.uidFromSID(req.query.session, (err, exists, user_id) => {
       if (err) { return next(err); }
