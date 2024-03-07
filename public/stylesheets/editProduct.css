@@ -1,0 +1,72 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+}
+
+.edit-product-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+}
+
+.product-image img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.product-info {
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.quantity-editor {
+  margin-bottom: 20px;
+}
+
+.quantity-editor label {
+  margin-right: 10px;
+}
+
+.quantity-editor input {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+
+.save-changes {
+  background-color: #4CAF50;
+}
+
+.delete-product {
+  background-color: #f44336;
+}
+
+.product-description p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+}

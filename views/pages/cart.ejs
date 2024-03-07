@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <title>Checkout</title>
-    </head>
-    <body>
-        <p>this is my cart page, have a cow</p>
-        <img src="/images/cow.gif">
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
+</head>
+<body>
+    <div class="shopping-cart-container">
+        <div class="cart-items">
+            <h1>Shopping Cart</h1>
+            <div class="cart-item">
+                <img src="/images/logo.png" width=50px alt="Image" class="item-image">
+                <div class="item-details">
+                    <p class="item-title">Product Name</p>
+                    <p class="item-price">$19.99</p>
+                    <div class="item-quantity">
+                        <label for="quantity">Qty:</label>
+                        <select id="quantity" name="quantity">
+                            <option value="1">1</option>
+                            <!-- Additional quantity options -->
+                        </select>
+                        <img src="/images/bin.png" width=25px alt="Remove item" class="remove-item">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-summary">
+            <h2>Order Summary:</h2>
+            <p>Subtotal: $19.99</p>
+            <button class="checkout-btn">Proceed to Checkout:</button>
+        </div>
+    </div>
+</body>
 </html>
