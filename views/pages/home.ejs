@@ -4,50 +4,14 @@
 
 <head>
   <title>
-    <%= title %>
+    Home Page
   </title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-  <h1>
-    <%= title %>
-  </h1>
-  <% if (items && items.length > 0) { %>
-    <ul>
-      <% items.forEach(function(item) { %>
-        <li>
-          <h2><%= item.name %></h2>
-          <p>Price: $<%= item.price %></p>
-          <p>Quantity: <%= item.quantity %></p>
-          <p>Description: <%= item.description %></p>
-          <% if (item.image) { %>
-            <img src="<%= item.image %>" alt="Image of <%= item.name %>">
-          <% } else if (item.thumbnail) { %>
-            <img src="<%= item.thumbnail %>" alt="Thumbnail of <%= item.name %>">
-          <% } %>
-        </li>
-      <% }); %>
-    </ul>
-  <% } else { %>
-    <p>No items to display.</p>
-  <% } %>
 
   <img src="/images/cow.gif">
-
-  <script>
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-    const sessionValue = getQueryParam('session');
-
-    if (sessionValue) {
-        console.log('Session:', sessionValue);
-    } else {
-        console.log('Session parameter not found in the URL.');
-    }
-</script>
 
 </body>
 
