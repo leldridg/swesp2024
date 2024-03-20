@@ -9,9 +9,8 @@
 
     <% total = 0 %>
     <% items.forEach(function(item) {%>
-
-<%  total += item.price * item.quantity;%>
-<%  });%>
+        <%  total += item.price * item.quantity;%>
+    <%  });%>
 
 
 <body>
@@ -36,7 +35,6 @@
                         <label for="quantity">Qty:</label>
                         <select id="quantity" name="quantity">
                             <option value=<%= item.quantity %>> </option>
-                            <!-- Additional quantity options -->
                         </select>
                         <img src="/images/bin.png" width=25px alt="Remove item" class="remove-item">
                     </div>
