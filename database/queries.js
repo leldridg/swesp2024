@@ -146,7 +146,7 @@ function uidFromSID(session_id, callback) {
     if(result.rows[0].user_id == undefined){
       return callback(null, false, null);
     }
-    callback(null, true, result.rows[0].user_id);
+    callback(null, true, result.rows[0].user_id); //err, exists, user_id
   });
 }
 
@@ -198,6 +198,28 @@ function productInfoFromPID(product_id, callback) {
   });
 }
 
+// takes: user_id
+// returns: exists boolean, is_admin boolean
+// callback: err, exists, is_admin
+function adminFromUID(user_id, callback) {
+  let sql = 
+  `
+    SELECT is_admin
+    FROM account
+
+    WHERE user_id = '${user_id}';
+  `
+
+  //not sure about this section, or quite what kind of error handling needs to be done here
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err, null, null); }
+    if(result.rows[0].is_admin == undefined) {
+      return callback(null, false, null);
+    }
+    callback(null, true, result.rows[0].is_admin);
+  });
+}
+
 module.exports = {
   fetchProducts,
   createAccount,
@@ -210,5 +232,6 @@ module.exports = {
   uidFromSID,
   usernameByUID,
   cartItemsbyUID,
-  productInfoFromPID
+  productInfoFromPID,
+  adminFromUID
 };
