@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
 </head>
 
-    <% total = 0 %>
+<% total = 0 %>
+
+
+    <% if (items && items.length > 0) { %>
     <% items.forEach(function(item) {%>
         <%  total += item.price * item.quantity;%>
     <%  });%>
+    <% } %>
 
 
 <body>
@@ -33,9 +37,8 @@
                     <p class="item-price">$<%= item.price %></p>
                     <div class="item-quantity">
                         <label for="quantity">Qty:</label>
-                        <select id="quantity" name="quantity">
-                            <option value=<%= item.quantity %>> </option>
-                        </select>
+                        <input id="quantity" type="number" value=<%= item.quantity %> />
+    
                         <img src="/images/bin.png" width=25px alt="Remove item" class="remove-item">
                     </div>
                 </div>
