@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <title>Checkout</title>
-    </head>
-    <body>
-        <p>this is my add product page :3</p>
-        <h1 style="color:red">ADMINS ONLY!!!</h1>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <link rel="stylesheet" href="/stylesheets/addProduct.css">
+  <%- include('../partials/head.ejs') %>
+</head>
+<body>
+  <div class="add-product-container">
+    <form class="add-product-form">
+      <div class="form-group">
+        <label for="product-name">Product Name:</label>
+        <input type="text" id="product-name" name="product-name">
+      </div>
+      <div class="form-group">
+        <label for="product-price">Price Per Unit:</label>
+        <input type="text" id="product-price" name="product-price" placeholder="$">
+      </div>
+      <div class="form-group">
+        <label for="product-qty">Qty:</label>
+        <input type="number" id="product-qty" name="product-qty" value="1">
+      </div>
+      <div class="form-group">
+        <label for="product-description">Description:</label>
+        <textarea id="product-description" name="product-description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="product-picture">Picture:</label>
+        <input type="file" id="product-picture" name="product-picture">
+      </div>
+      <button type="submit" class="add-product-btn">Add Product</button>
+    </form>
+  </div>
+</body>
 </html>
