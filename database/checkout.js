@@ -21,3 +21,5 @@ function checkout(user_id, callback) {
         })
     })
 }
+
+module.exports = { checkout }
