@@ -43,10 +43,33 @@ function deleteItemByIID(item_id) {
 
 // delete an item from cart_item based on product_id
 // takes product_id
+// returns: boolean (success?)
+function deleteItemByPID(product_id) {
+  let sql =
+  `
+  DELETE FROM cart_item WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err, result) => {
+    if (err) {return callback(err, false);}
+    callback(true);
+  });
+}
 
 // delete an item from cart_item based on user_id and product_id
 // takes user_id, product_id
 // returns: boolean (success?)
+function deleteItemByUIDPID(user_id, product_id) {
+  let sql =
+  `
+  DELETE FROM cart_item
+  WHERE product_id = '${product_id}'
+    AND user_id = '${user_id}';
+  `
+  db.query(sql, (err, result) => {
+    if (err) {return callback(err, false);}
+    callback(true);
+  });
+}
 
 // grabs all products from the table
 function fetchProducts(callback) {
