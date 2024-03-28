@@ -6,7 +6,7 @@
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
   <link rel='stylesheet' href='/stylesheets/createAccount.css' />
   <title>Create Account</title>
-  
+  <%- include('../partials/head.ejs') %>
 </head>
 
 <% if (taken) { %>
@@ -18,7 +18,6 @@
 
 <body>
   <div class="login-container">
-    <!-- Updated form tag with action and method attributes -->
     <form class="create-account-form" action="/create-account" method="post">
       <div class="input-group">
         <label for="username">username:</label>
