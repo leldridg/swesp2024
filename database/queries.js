@@ -10,6 +10,123 @@
 
 const db = require('../database/db.js'); // Adjust the path as necessary
 
+// update available quantity of specified product
+// takes product_id, quantity
+function updateProdQuantity(product_id, quantity, callback) {
+  let sql =
+  `
+  UPDATE product
+  SET quantity = '${quantity}'
+  WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err); }
+  });
+}
+
+// get available quantity of specified product
+// takes product_id
+// returns available quantity
+function getProdQuantity(product_id, callback) {
+  let sql =
+  `
+  SELECT quantity
+  FROM product
+  WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err, undefined);} //might not be handling all cases here
+    callback(null, result.rows.quantity);
+  });
+}
+
+// add a new product to the product table
+// takes: product name, product img url, price, available quantity, description
+// returns: nothing?
+// NOTE: no input validation is being done here
+// also, no differentiation between image and thumbnail right now
+function addProduct(name, img, price, quantity, desc, callback) {
+  let sql =
+  `
+  INSERT INTO produce (name, image, thumbnail, price, quantity, description)
+  VALUES ('${name}', '${img}', '${img}', '${price}', '${quantity}', '${desc}');
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err); }
+  });
+}
+
+// delete an item from cart_item based on item_id
+// takes: item_id
+// returns: nothing
+function deleteItemByIID(item_id, callback) {
+  let sql =
+  `
+  DELETE FROM cart_item WHERE item_id = '${item_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) { return callback(err); }
+
+  });
+}
+
+// delete an item from cart_item based on product_id
+// takes product_id
+// returns: nothing
+function deleteItemByPID(product_id, callback) {
+  let sql =
+  `
+  DELETE FROM cart_item WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err);}
+  });
+}
+
+// delete an item from cart_item based on user_id and product_id
+// takes user_id, product_id
+// returns: nothing
+function deleteItemByUIDPID(user_id, product_id, callback) {
+  let sql =
+  `
+  DELETE FROM cart_item
+  WHERE product_id = '${product_id}'
+    AND user_id = '${user_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) { return callback(err); }
+  });
+}
+
+// delete a product from product table pased on product_id
+// takes product_id
+// returns nothing
+// NOTE: DO NOT USE DIRECTLY TO DELETE A PRODUCT AS ADMIN,
+// INSTEAD, USE FUNCTION IN deleteProduct.js
+function deleteProductByPID(product_id, callback) {
+  let sql =
+  `
+  DELETE FROM product WHERE product_id = '${product_id}';
+  `
+
+  db.query(sql, (err) => {
+    if (err) {return callback(err);}
+  });
+}
+
+//delete rows in product_category given a product_id
+//takes: product_id
+//returns: nothing
+function deleteProdcatByPID(product_id, callback) {
+  let sql =
+  `
+  DELETE FROM product_category WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err);}
+  });
+}
+
 // grabs all products from the table
 function fetchProducts(callback) {
   let sql =
@@ -143,6 +260,9 @@ function uidFromSID(session_id, callback) {
   `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
+    if(result.rows.length == 0){
+      return callback(null, false, null);
+    }
     if(result.rows[0].user_id == undefined){
       return callback(null, false, null);
     }
@@ -221,6 +341,14 @@ function adminFromUID(user_id, callback) {
 }
 
 module.exports = {
+  updateProdQuantity,
+  getProdQuantity,
+  addProduct,
+  deleteItemByIID,
+  deleteItemByPID,
+  deleteItemByUIDPID,
+  deleteProdcatByPID,
+  deleteProductByPID,
   fetchProducts,
   createAccount,
   accountTaken,

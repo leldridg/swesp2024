@@ -26,7 +26,13 @@ function getUserCart(user_id, callback) {
           hasErrorOccurred = true;
           return callback(err);
         }
-        value.quantity = item.quantity;
+
+        
+        if(!item.quantity){
+          value.quantity = 1;
+        } else {
+          value.quantity = item.quantity;
+        }
 
         items[index] = value; // Use index to maintain order
         completedRequests++;
