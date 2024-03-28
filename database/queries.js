@@ -10,6 +10,36 @@
 
 const db = require('../database/db.js'); // Adjust the path as necessary
 
+// update available quantity of specified product
+// takes product_id, quantity
+function updateProdQuantity(product_id, quantity, callback) {
+  let sql =
+  `
+  UPDATE product
+  SET quantity = '${quantity}'
+  WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err); }
+  });
+}
+
+// get available quantity of specified product
+// takes product_id
+// returns available quantity
+function getProdQuantity(product_id, callback) {
+  let sql =
+  `
+  SELECT quantity
+  FROM product
+  WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err, undefined);} //might not be handling all cases here
+    callback(null, result.rows.quantity);
+  });
+}
+
 // add a new product to the product table
 // takes: product name, product img url, price, available quantity, description
 // returns: nothing?
@@ -308,6 +338,8 @@ function adminFromUID(user_id, callback) {
 }
 
 module.exports = {
+  updateProdQuantity,
+  getProdQuantity,
   addProduct,
   deleteItemByIID,
   deleteItemByPID,
