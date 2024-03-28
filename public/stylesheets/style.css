@@ -1,71 +1,8 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: hsl(0, 0%, 97%);
-}
-
-h1 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates three columns */
-  gap: 20px;
-  padding: 20px;
-}
-
-.product-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-image {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-
-.product-name {
-  font-size: 1.2rem;
-  color: #333;
-  margin: 8px 0;
-}
-
-.product-price {
-  color: #565656;
-  margin-bottom: 8px;
-}
-
-.product-quantity {
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-}
-
-.product-description {
-  font-size: 0.9rem;
-  color: #666;
-  height: 60px; /* Fixed height for consistent card size */
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* Two columns for smaller screens */
+body {
+    padding: 50px;
+    font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
   }
-}
-
-@media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: 1fr; /* One column for mobile screens */
+  
+  a {
+    color: #00B7FF;
   }
-}
