@@ -71,6 +71,37 @@ function deleteItemByUIDPID(user_id, product_id) {
   });
 }
 
+// delete a product from product table pased on product_id
+// takes product_id
+// returns boolean (success?)
+// NOTE: DO NOT USE DIRECTLY TO DELETE A PRODUCT AS ADMIN,
+// INSTEAD, USE FUNCTION IN deleteProduct.js
+function deleteProductByPID(product_id) {
+  let sql =
+  `
+  DELETE FROM product WHERE product_id = '${product_id}';
+  `
+
+  db.query(sql, (err, result) => {
+    if (err) {return callback(err, false);}
+    callback(true);
+  });
+}
+
+//delete rows in product_category given a product_id
+//takes: product_id
+//returns: boolean (success?)
+function deleteProdcatByPID(product_id) {
+  let sql =
+  `
+  DELETE FROM product_category WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err, result) => {
+    if (err) {return callback(err, false);}
+    callback(true);
+  });
+}
+
 // grabs all products from the table
 function fetchProducts(callback) {
   let sql =
