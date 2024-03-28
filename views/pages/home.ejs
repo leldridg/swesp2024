@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>
+    Home Page
+  </title>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <%- include('../partials/head.ejs') %>
@@ -28,20 +31,6 @@
   <% } %>
 
   <img src="/images/cow.gif">
-
-  <script>
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-    const sessionValue = getQueryParam('session');
-
-    if (sessionValue) {
-        console.log('Session:', sessionValue);
-    } else {
-        console.log('Session parameter not found in the URL.');
-    }
-</script>
 
 </body>
 </html>

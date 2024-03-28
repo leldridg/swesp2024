@@ -143,6 +143,9 @@ function uidFromSID(session_id, callback) {
   `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
+    if(result.rows.length == 0){
+      return callback(null, false, null);
+    }
     if(result.rows[0].user_id == undefined){
       return callback(null, false, null);
     }

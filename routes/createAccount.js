@@ -9,6 +9,7 @@ const generator = require('../database/generateToken');
 router.get('/', function (req, res, next) {
   res.render('pages/create-account', { taken: false } );
 });
+
 router.post('/', function(req, res, next) { // Include 'next' in the function parameters
 
   const { username, password } = req.body; // Extracting username and password from the form submission
