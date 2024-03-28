@@ -5,30 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
+    <%- include('../partials/head.ejs') %>
 </head>
+
+<% total = 0 %>
+
+
+    <% if (items && items.length > 0) { %>
+    <% items.forEach(function(item) {%>
+        <%  total += item.price * item.quantity;%>
+    <%  });%>
+    <% } %>
+
+
 <body>
     <div class="shopping-cart-container">
         <div class="cart-items">
-            <h1>Shopping Cart</h1>
-            <div class="cart-item">
-                <img src="/images/logo.png" width=50px alt="Image" class="item-image">
+            <h1> <%= title %>'s Shopping Cart</h1>
+
+            <% if (items && items.length > 0) { %>
+                <% items.forEach(function(item) { %>
+
+                <div class="cart-item">
+                <% if (item.image) { %>
+                    <img src=<%= item.image %> width=50px alt="Image" class="item-image">
+                <% } else { %>
+                    <img src="/images/logo.png" width=50px alt="Image" class="item-image">
+                <% } %>
+
                 <div class="item-details">
-                    <p class="item-title">Product Name</p>
-                    <p class="item-price">$19.99</p>
+                    <p class="item-title"><%= item.name %></p>
+                    <p class="item-price">$<%= item.price %></p>
                     <div class="item-quantity">
                         <label for="quantity">Qty:</label>
-                        <select id="quantity" name="quantity">
-                            <option value="1">1</option>
-                            <!-- Additional quantity options -->
-                        </select>
+                        <input id="quantity" type="number" value=<%= item.quantity %> />
+    
                         <img src="/images/bin.png" width=25px alt="Remove item" class="remove-item">
                     </div>
                 </div>
             </div>
         </div>
+    </br>
+        <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No items to display.</p>
+  <% } %>
+
         <div class="order-summary">
             <h2>Order Summary:</h2>
-            <p>Subtotal: $19.99</p>
+            <p>Subtotal: $<%= total.toFixed(2) %></p>
             <button class="checkout-btn">Proceed to Checkout:</button>
         </div>
     </div>
