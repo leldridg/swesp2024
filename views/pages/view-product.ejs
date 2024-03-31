@@ -19,16 +19,20 @@
             <% } else { %>
                 <p class="stock-status">Out of Stock</p>
             <% } %>
-            <div class="quantity-selector">
-                <label for="quantity">Qty:</label>
-                <select id="quantity" name="quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <!-- Adjust quantity options based on product availability or omit if not applicable -->
-                </select>
-            </div>
-            <button class="add-to-cart-btn">Add to Cart</button>
+            <form class="login-form" action="/view-product" method="post">
+                <div class="quantity-selector">
+                    <label for="quantity">Qty:</label>
+                    <select id="quantity" name="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <!-- Adjust quantity options based on product availability or omit if not applicable -->
+                    </select>
+                </div>
+                <input type="hidden" name="token" value= <%= token %>>
+                <input type="hidden" name="productId" value= <%= productId %>>
+             <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>
             <p class="product-description"><%= item.description %></p>
         </div>
     </div>
