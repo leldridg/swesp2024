@@ -337,6 +337,22 @@ function adminFromUID(user_id, callback) {
   });
 }
 
+function addItemToCart(user_id, product_id, quantity, callback){
+  let sql = 
+  `
+    INSERT INTO cart_item 
+    (user_id, product_id, quantity)
+    VALUES ('${user_id}', '${product_id}', '${quantity}');
+  `
+  //not sure about this section, or quite what kind of error handling needs to be done here
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err); }
+    callback(null);
+  });
+}
+
+
+
 module.exports = {
   updateProdQuantity,
   getProdQuantity,
@@ -358,5 +374,6 @@ module.exports = {
   usernameByUID,
   cartItemsbyUID,
   productInfoFromPID,
-  adminFromUID
+  adminFromUID,
+  addItemToCart
 };
