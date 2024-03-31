@@ -12,7 +12,33 @@ router.get('/', function (req, res, next) {
       console.error(err);
       return res.status(500).send('An error occurred');
     }
-    res.render('pages/home', { title: "Home!", items: items, token: token});
+
+    queries.uidFromSID(token, (err, exists, user_id) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('An error occurred');
+      }
+
+      if(!exists){
+        res.send("invalid session token ):");
+      }
+      if(exists){
+        queries.adminFromUID(user_id, (err, exists, is_admin) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).send('An error occurred');
+          }
+          if(!exists){
+            res.send("invalid session token ):");
+          }
+          if(exists){
+
+
+            res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin});
+          }
+        });
+      }
+    });
   });
   
 });

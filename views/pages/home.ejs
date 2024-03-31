@@ -13,7 +13,7 @@
   <% if (items && items.length > 0) { %>
     <div class="product-grid">
       <% items.forEach(function(item) { %>
-        <a href="/view-product/<%= item.product_id %><%= token ? '?session=' + token : '' %>" class="product-link">
+        <a href="/<% if (admin) { %>edit<% } else { %>view<% } %>-product/<%= item.product_id %><%= token ? '?session=' + token : '' %>" class="product-link">
           <div class="product-card">
             <h2 class="product-name"><%= item.name %></h2>
             <% if (item.image) { %>
