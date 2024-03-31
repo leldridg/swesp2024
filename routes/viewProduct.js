@@ -12,9 +12,6 @@ router.get('/:productId', (req, res) => {
   productId = req.params.productId;
   token = req.query.session;
 
-  console.log("product id: " + productId);
-  console.log("token: " + token);
-
   queries.productInfoFromPID(productId, (err, item) => {
     if (err) {
       console.error(err);
