@@ -11,6 +11,7 @@ const viewProduct = require("./routes/viewProduct.js");
 const shoppingCart = require("./routes/shoppingCart.js");
 
 
+
 const db = require('./database/db.js'); // Adjust the path as necessary
 
 const app = express();

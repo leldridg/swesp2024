@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Product Page</title>
+    <title>View Product - <% item.name %></title>
     <link rel="stylesheet" href="/stylesheets/viewProduct.css">
 </head>
 <body>
     <div class="product-container">
-        <div class="product-image">
-            <img src="/images/logo.png" alt="Image">
-        </div>
         <div class="product-details">
-            <h1>Product Name</h1>
-            <p class="price">$19.99</p>
-            <p class="stock-status">Currently in Stock!</p>
+            <h1><%= item.name %></h1>
+            <div class="product-image">
+                <img src="<%= item.image %>" style="max-width: 400px; height: auto;">
+            </div>            
+            <p class="price">$<%= item.price %></p>
+            <% if (item.quantity > 0) { %>
+                <p class="stock-status">Currently in Stock!</p>
+            <% } else { %>
+                <p class="stock-status">Out of Stock</p>
+            <% } %>
             <div class="quantity-selector">
                 <label for="quantity">Qty:</label>
                 <select id="quantity" name="quantity">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    <!-- Additional quantity options -->
+                    <!-- Adjust quantity options based on product availability or omit if not applicable -->
                 </select>
             </div>
             <button class="add-to-cart-btn">Add to Cart</button>
-            <p class="product-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p class="product-description"><%= item.description %></p>
         </div>
     </div>
 </body>

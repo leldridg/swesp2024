@@ -18,7 +18,7 @@ body, html {
   .product-image {
     flex: 1;
     padding-right: 20px;
-    text-align: center;
+    text-align: left;
   }
   
   .product-image img {

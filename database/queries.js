@@ -304,7 +304,7 @@ function cartItemsbyUID(user_id, callback) {
 // returns: product info
 function productInfoFromPID(product_id, callback) {
   let sql = `
-    SELECT name, price, description
+    SELECT name, price, description, quantity, image
     FROM product
 
     WHERE product_id = '${product_id}';
