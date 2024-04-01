@@ -21,36 +21,31 @@
 <body>
     <div class="shopping-cart-container">
         <div class="cart-items">
-            <h1> <%= title %>'s Shopping Cart</h1>
-
+            <h1><%= title %>'s Shopping Cart</h1>
             <% if (items && items.length > 0) { %>
                 <% items.forEach(function(item) { %>
+                    <div class="cart-item">
+                        <% if (item.image) { %>
+                            <img src=<%= item.image %> alt="Image" class="item-image">
+                        <% } else { %>
+                            <img src="/images/logo.png" alt="Image" class="item-image">
+                        <% } %>
 
-                <div class="cart-item">
-                <% if (item.image) { %>
-                    <img src=<%= item.image %> width=50px alt="Image" class="item-image">
-                <% } else { %>
-                    <img src="/images/logo.png" width=50px alt="Image" class="item-image">
-                <% } %>
-
-                <div class="item-details">
-                    <p class="item-title"><%= item.name %></p>
-                    <p class="item-price">$<%= item.price %></p>
-                    <div class="item-quantity">
-                        <label for="quantity">Qty:</label>
-                        <input id="quantity" type="number" value=<%= item.quantity %> />
-    
-                        <img src="/images/bin.png" width=25px alt="Remove item" class="remove-item">
+                        <div class="item-details">
+                            <p class="item-title"><%= item.name %></p>
+                            <p class="item-price">$<%= item.price.toFixed(2) %></p>
+                            <div class="item-quantity">
+                                <label for="quantity">Qty:</label>
+                                <input id="quantity" type="number" value=<%= item.quantity %> />
+                                <img src="/images/bin.png" alt="Remove item" class="remove-item">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                <% }); %>
+            <% } else { %>
+                <p>No items to display.</p>
+            <% } %>
         </div>
-    </br>
-        <% }); %>
-    </ul>
-  <% } else { %>
-    <p>No items to display.</p>
-  <% } %>
 
         <div class="order-summary">
             <h2>Order Summary:</h2>

@@ -8,9 +8,8 @@ body, html {
 .shopping-cart-container {
   max-width: 1200px;
   margin: 40px auto;
-  display: grid;
-  grid-template-columns: 1fr 300px; /* Divide the container into two columns */
-  gap: 20px; /* Add some space between the columns */
+  display: flex;
+  flex-direction: column;
   background: #fff;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -65,13 +64,16 @@ body, html {
 
 .remove-item {
   cursor: pointer;
-  /* Additional styles for the remove icon */
+  height: 20px;
+  width: auto;
 }
 
 .order-summary {
+  order: 2;
   background: #f1f1f1;
   border-radius: 4px;
   padding: 20px;
+  margin-top: auto;
 }
 
 .order-summary h2 {
@@ -93,17 +95,6 @@ body, html {
 
 .checkout-btn:hover {
   background-color: #444;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .shopping-cart-container {
-    grid-template-columns: 1fr; /* Stack columns on small screens */
-  }
-
-  .order-summary {
-    order: -1; /* Order summary goes above the cart items on small screens */
-  }
 }
 
   
