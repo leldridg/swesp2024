@@ -48,7 +48,7 @@ function getProdQuantity(product_id, callback) {
 function addProduct(name, img, price, quantity, desc, callback) {
   let sql =
   `
-  INSERT INTO produce (name, image, thumbnail, price, quantity, description)
+  INSERT INTO product (name, image, thumbnail, price, quantity, description)
   VALUES ('${name}', '${img}', '${img}', '${price}', '${quantity}', '${desc}');
   `
   db.query(sql, (err) => {
