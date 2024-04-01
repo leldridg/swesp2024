@@ -31,6 +31,13 @@ router.get('/:productId', (req, res) => {
 router.post('/', function (req, res) {
   const { productId, quantity, token} = req.body; // Extracting username and password from the form submission
 
+  console.log("t" + token);
+
+  if(token == "" || token == null || token == undefined){
+
+    res.redirect('/login');
+  } else {
+
   queries.uidFromSID(token, (err, exists, user_id) => {
     if (err) { return callback(err, null, null) }
 
@@ -50,6 +57,7 @@ router.post('/', function (req, res) {
       });
     }
   });
+}
 });
 
 
