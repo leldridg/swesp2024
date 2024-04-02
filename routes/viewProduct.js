@@ -31,16 +31,11 @@ router.get('/:productId', (req, res) => {
 router.post('/', function (req, res) {
   const { productId, quantity, token } = req.body; // Extracting username and password from the form submission
 
-  console.log("----");
-  console.log(productId);
-  console.log(quantity);
-  console.log(token);
-  console.log("----");
+
   if (token == "" || token == null || token == undefined) {
 
     console.log("guest addition");
-    guestAccount.guestAccount((err, genToken, user_id) => { });
-
+    guestAccount.guestAccount((err) => { });
 
     console.log(token);
     queries.uidFromSID(token, (err, exists, user_id) => {

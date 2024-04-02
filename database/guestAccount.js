@@ -13,7 +13,7 @@ function guestAccount(callback) {
     // create an account
     // give em a token?
 
-    const generateRandomAlphanumeric = length => Array.from({ length }, () => "abcdefg0123456789".charAt(Math.floor(Math.random() * 62))).join('');
+    const generateRandomAlphanumeric = length => Array.from({ length }, () => "ABCDEFG0123456789".charAt(Math.floor(Math.random() * 16))).join('');
 
     let extraText = generateRandomAlphanumeric(8);
 
