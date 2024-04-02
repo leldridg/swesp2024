@@ -10,15 +10,27 @@ router.get('/', function (req, res, next) {
 
   const token = req.query.session || null;
 
-  console.log(token);
+  if(token == null || token == undefined || token == ""){
+    res.redirect(`/`);
+  }
 
-  res.render('pages/add-product', {token : token});
+  isAdmin.isTokenAdmin(token, (err, exists, is_admin) => {
+    if(err){ next(err) }
+    if(exists) {
+      if(is_admin){
+        res.render('pages/add-product', {token : token});
+      } else {
+        res.redirect(`/?session=${token}`);
+      }
+      if(!exists){
+        res.send("invalid session token ):");
+      }
+    }
+  });
+
 });
 
-
 router.post('/', function (req, res) {
-
-  console.log(req.body);
 
   const { token, productName, productPrice, productQty, productDescription, productPicture} = req.body; // Extracting username and password from the form submission
 
@@ -31,7 +43,6 @@ router.post('/', function (req, res) {
       if(exists) {
         if(is_admin){
 
-          //function addProduct(name, img, price, quantity, desc, callback) {
           queries.addProduct(productName, productPicture, productPrice, productQty, productDescription, (err) => {
             if(err){next(err);}
           });
