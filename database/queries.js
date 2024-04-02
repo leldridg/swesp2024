@@ -258,9 +258,12 @@ function uidFromSID(session_id, callback) {
 
     WHERE session_id = '${session_id}';
   `
-  console.log("session" + session_id);
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
+    if(result.rows[0] == undefined){
+      return callback(null, false, null);
+    }
+
     if(result.rows[0].user_id == undefined){
       return callback(null, false, null);
     }
@@ -340,9 +343,6 @@ function adminFromUID(user_id, callback) {
 
 function addItemToCart(user_id, product_id, quantity, callback){
 
-  console.log(user_id);
-  console.log(product_id);
-  console.log(quantity);
   let sql = 
   `
   INSERT INTO cart_item (user_id, product_id, quantity)

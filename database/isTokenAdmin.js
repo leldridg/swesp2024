@@ -14,7 +14,6 @@ function isTokenAdmin(session_id, callback) {
         if (!exists) { return callback(err, false, null) }
 
         queries.adminFromUID(user_id, (err, exists, is_admin) => {
-            //console.log(err + exists + is_admin);
             callback(err, exists, is_admin) //only line that is needed given error handling in function?
         });
     });

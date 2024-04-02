@@ -25,10 +25,9 @@ function generateToken(username, callback) {
         queries.insertToken(sess, user_id, (err) => {
           if (err) { console.log(err); }
         });
-        console.log(`/?session=${sess}`);
         callback(null, sess);
       } else {
-        console.log('non unique token created');
+        callback(null,null);
       }
     });
   });
