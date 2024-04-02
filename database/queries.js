@@ -258,8 +258,6 @@ function uidFromSID(session_id, callback) {
 
     WHERE session_id = '${session_id}';
   `
-  console.log(sql);
-  console.log("session " + session_id);
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
     if(result.rows[0] == undefined){

@@ -40,7 +40,6 @@ router.get('/', function (req, res, next) {
           }
           if(exists){
 
-
             res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin});
           }
         });

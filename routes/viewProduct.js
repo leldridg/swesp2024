@@ -34,30 +34,9 @@ router.post('/', function (req, res) {
 
   if (token == "" || token == null || token == undefined) {
 
-    console.log("guest addition");
-    guestAccount.guestAccount((err) => { });
-
-    console.log(token);
-    queries.uidFromSID(token, (err, exists, user_id) => {
-
-    if(err){return callback(err); }
-    if(!exists){
-      console.log("token doesn't exist");
-    }
-    if(exists){
-    queries.addItemToCart(user_id, productId, quantity, (err) => {
-      if (err) {
-        console.log(err)
-        return res.status(500).send('An error occurred');
-      } else {
-        console.log("this code has ran and redirected");
-        res.redirect(`/?session=${genToken}`);
-      }
+    guestAccount.guestAccount(productId, quantity, (err, genToken) => { 
+      res.redirect(`/?session=${genToken}`);
     });
-  }
-  console.log("this ran!.........");
-  });
-
   } else {
 
     queries.uidFromSID(token, (err, exists, user_id) => {
