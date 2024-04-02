@@ -42,11 +42,15 @@ router.post('/', function (req, res) {
       if(err){ next(err) }
       if(exists) {
         if(is_admin){
-
-          queries.addProduct(productName, productPicture, productPrice, productQty, productDescription, (err) => {
-            if(err){next(err);}
-          });
-          res.redirect(`/?session=${token}`);
+          
+          if(productName == "" ||productPrice == "" || productPicture == "" || productQty == "" || productDescription == ""){
+            res.redirect(`/add-product/?session=${token}`)
+          } else {
+            queries.addProduct(productName, productPicture, productPrice, productQty, productDescription, (err) => {
+              if(err){next(err);}
+            });
+            res.redirect(`/?session=${token}`);
+          }
         } else {
           res.send("invalid session token. you are not an admin ):");
         }

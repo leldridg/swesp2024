@@ -15,6 +15,17 @@
 				</a>
 			</nav>
 		</div>
+		<% if (admin) { %>
+			<div class="logo">
+				<nav class="a">
+					<a href="/add-product<%= token ? '?session=' + token : '' %>" class="logo">
+						<img src="../images/logo.png" alt="Logo" class="top-left-image">
+					</a>
+				</nav>
+			</div>
+		<% } %>
+		
+	
 			<div class="action-items">
 			<div class="dropdown">
 				<button class="dropbtn">Sign In</button>
