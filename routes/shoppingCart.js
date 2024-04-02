@@ -8,8 +8,6 @@ const userCart = require('../database/userCart');
 
 router.get('/', function (req, res, next) {
 
-  console.log(req.query);
-
   if(Object.keys(req.query).length === 0){
     res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null});
   } else {
@@ -26,7 +24,6 @@ router.get('/', function (req, res, next) {
           });
         });
       } else {
-        console.log("invalid session token");
         res.send("invalid session token ):");
       }
     });
