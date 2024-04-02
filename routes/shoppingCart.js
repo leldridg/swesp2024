@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
   console.log(req.query);
 
   if(Object.keys(req.query).length === 0){
-    res.render('pages/cart', { title: 'welcome, guest user!', items: null});
+    res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null});
   } else {
     queries.uidFromSID(req.query.session, (err, exists, user_id) => {
       if (err) { return next(err); }
@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
           userCart.getUserCart(user_id, (err, items) => {
             if (err) { return next(err); }
 
-            res.render('pages/cart', { title: username, items: items});
+            res.render('pages/cart', { title: username, items: items, token:req.query.session});
           });
         });
       } else {

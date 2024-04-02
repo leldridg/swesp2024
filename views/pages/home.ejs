@@ -6,25 +6,27 @@
   </title>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <%- include('../partials/head.ejs') %>
+  <%- include('../partials/head.ejs', {token: token}) %>
 </head>
 <body>
   <h1><%= title %></h1>
   <% if (items && items.length > 0) { %>
     <div class="product-grid">
       <% items.forEach(function(item) { %>
-        <div class="product-card">
-          <h2 class="product-name"><%= item.name %></h2>
-          <% if (item.image) { %>
-            <img class="product-image" src="<%= item.image %>" alt="Image of <%= item.name %>">
-          <% } else if (item.thumbnail) { %>
-            <img class="product-image" src="<%= item.thumbnail %>" alt="Thumbnail of <%= item.name %>">
-          <% } %>
-          <p class="product-price">Price: $<%= item.price %></p>
-          <p class="product-quantity">Quantity: <%= item.quantity %></p>
-          <p class="product-description"><%= item.description %></p>
-        </div>
-      <% }); %>
+        <a href="/<% if (admin) { %>edit<% } else { %>view<% } %>-product/<%= item.product_id %><%= token ? '?session=' + token : '' %>" class="product-link">
+          <div class="product-card">
+            <h2 class="product-name"><%= item.name %></h2>
+            <% if (item.image) { %>
+              <img class="product-image" src="<%= item.image %>" alt="Image of <%= item.name %>">
+            <% } else if (item.thumbnail) { %>
+              <img class="product-image" src="<%= item.thumbnail %>" alt="Thumbnail of <%= item.name %>">
+            <% } %>
+            <p class="product-price">Price: $<%= item.price %></p>
+            <p class="product-quantity">Quantity: <%= item.quantity %></p>
+            <p class="product-description"><%= item.description %></p>
+          </div>
+        </a>
+      <% }); %>      
     </div>
   <% } else { %>
     <p>No items to display.</p>

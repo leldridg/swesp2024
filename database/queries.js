@@ -48,7 +48,7 @@ function getProdQuantity(product_id, callback) {
 function addProduct(name, img, price, quantity, desc, callback) {
   let sql =
   `
-  INSERT INTO produce (name, image, thumbnail, price, quantity, description)
+  INSERT INTO product (name, image, thumbnail, price, quantity, description)
   VALUES ('${name}', '${img}', '${img}', '${price}', '${quantity}', '${desc}');
   `
   db.query(sql, (err) => {
@@ -258,6 +258,7 @@ function uidFromSID(session_id, callback) {
 
     WHERE session_id = '${session_id}';
   `
+  console.log("session" + session_id);
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
     if(result.rows[0].user_id == undefined){
@@ -304,7 +305,7 @@ function cartItemsbyUID(user_id, callback) {
 // returns: product info
 function productInfoFromPID(product_id, callback) {
   let sql = `
-    SELECT name, price, description
+    SELECT name, price, description, quantity, image
     FROM product
 
     WHERE product_id = '${product_id}';
@@ -337,6 +338,28 @@ function adminFromUID(user_id, callback) {
   });
 }
 
+function addItemToCart(user_id, product_id, quantity, callback){
+
+  console.log(user_id);
+  console.log(product_id);
+  console.log(quantity);
+  let sql = 
+  `
+  INSERT INTO cart_item (user_id, product_id, quantity)
+  VALUES ('${user_id}', '${product_id}', ${quantity});
+  `
+
+
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err); }
+    else {
+      callback(null);
+    }
+  });
+}
+
+
+
 module.exports = {
   updateProdQuantity,
   getProdQuantity,
@@ -358,5 +381,6 @@ module.exports = {
   usernameByUID,
   cartItemsbyUID,
   productInfoFromPID,
-  adminFromUID
+  adminFromUID,
+  addItemToCart
 };

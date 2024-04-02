@@ -10,7 +10,7 @@
 	<header class="site-header">
 		<div class="logo">
 			<nav class="a">
-				<a href="/" class="logo">
+				<a href="/<%= token ? '?session=' + token : '' %>" class="logo">
 					<img src="../images/logo.png" alt="Logo" class="top-left-image">
 				</a>
 			</nav>
@@ -24,7 +24,7 @@
 				</div>
 			</div>		
 			<nav class="user-navigation">
-				<a href="/cart" class="cart">
+				<a href="/cart<%= token ? '?session=' + token : '' %>" class="cart">
 					<img src="../images/shopping-cart.png" alt="">
 				</a>
 			</nav>

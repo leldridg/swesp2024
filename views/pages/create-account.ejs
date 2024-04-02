@@ -6,7 +6,7 @@
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
   <link rel='stylesheet' href='/stylesheets/createAccount.css' />
   <title>Create Account</title>
-  <%- include('../partials/head.ejs') %>
+  <%- include('../partials/head.ejs', {token: null}) %>
 </head>
 
 <% if (taken) { %>
