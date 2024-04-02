@@ -36,15 +36,7 @@ function guestAccount(callback) {
             // If the account is successfully created, send a success message
             generator.generateToken(username, (err, token) => {
               if (err) { return next(err) }
-              queries.uidFromSID(token, (err, exists, user_id) => {
-              if (err) { return next(err) }
-              if(exists){
-                callback(null, token, user_id);
-              } else {
-                console.log("null error");
-                callback(null, null, null);
-              }
-              });
+              callback(err)
             });
           });
         }

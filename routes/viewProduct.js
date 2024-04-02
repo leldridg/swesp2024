@@ -31,18 +31,37 @@ router.get('/:productId', (req, res) => {
 router.post('/', function (req, res) {
   const { productId, quantity, token } = req.body; // Extracting username and password from the form submission
 
+  console.log("----");
+  console.log(productId);
+  console.log(quantity);
+  console.log(token);
+  console.log("----");
   if (token == "" || token == null || token == undefined) {
-    guestAccount.guestAccount((err, genToken, user_id) => {
-      queries.addItemToCart(user_id, productId, quantity, (err) => {
-        if (err) {
-          console.log(err)
-          return res.status(500).send('An error occurred');
-        } else {
-          console.log("this code has ran and redirected");
-          res.redirect(`/?session=${genToken}`);
-        }
-      });
+
+    console.log("guest addition");
+    guestAccount.guestAccount((err, genToken, user_id) => { });
+
+
+    console.log(token);
+    queries.uidFromSID(token, (err, exists, user_id) => {
+
+    if(err){return callback(err); }
+    if(!exists){
+      console.log("token doesn't exist");
+    }
+    if(exists){
+    queries.addItemToCart(user_id, productId, quantity, (err) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).send('An error occurred');
+      } else {
+        console.log("this code has ran and redirected");
+        res.redirect(`/?session=${genToken}`);
+      }
     });
+  }
+  console.log("this ran!.........");
+  });
 
   } else {
 
