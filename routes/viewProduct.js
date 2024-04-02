@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 const queries = require('../database/queries');
-const guestAccount = require('../database/guestAccount');
+
 
 router.get('/', function (req, res, next) {
   res.render('pages/view-product');
@@ -23,48 +23,41 @@ router.get('/:productId', (req, res) => {
     }
 
     // Render the view-product.ejs template with the item object
-    res.render('pages/view-product', { item: item, productId: productId, token: token });
+    res.render('pages/view-product', { item: item, productId: productId, token:token });
 
   });
 });
 
 router.post('/', function (req, res) {
-  const { productId, quantity, token } = req.body; // Extracting username and password from the form submission
+  const { productId, quantity, token} = req.body; // Extracting username and password from the form submission
 
-  if (token == "" || token == null || token == undefined) {
-    guestAccount.guestAccount((err, genToken, user_id) => {
+  console.log("t" + token);
+
+  if(token == "" || token == null || token == undefined){
+
+    res.redirect('/login');
+  } else {
+
+  queries.uidFromSID(token, (err, exists, user_id) => {
+    if (err) { return callback(err, null, null) }
+
+    if (!exists) {
+      console.log("invalid session token");
+      res.send("invalid session token ):");
+    }
+
+    if (exists) {
       queries.addItemToCart(user_id, productId, quantity, (err) => {
         if (err) {
           console.log(err)
           return res.status(500).send('An error occurred');
         } else {
-          console.log("this code has ran and redirected");
-          res.redirect(`/?session=${genToken}`);
+          res.redirect(`/?session=${token}`);
         }
       });
-    });
-
-  } else {
-
-    queries.uidFromSID(token, (err, exists, user_id) => {
-      if (err) { return callback(err, null, null) }
-
-      if (!exists) {
-        res.send("invalid session token ):");
-      }
-
-      if (exists) {
-        queries.addItemToCart(user_id, productId, quantity, (err) => {
-          if (err) {
-            console.log(err)
-            return res.status(500).send('An error occurred');
-          } else {
-            res.redirect(`/?session=${token}`);
-          }
-        });
-      }
-    });
-  }
+    }
+  });
+}
 });
 
 

@@ -28,7 +28,7 @@ function generateToken(username, callback) {
         console.log(`/?session=${sess}`);
         callback(null, sess);
       } else {
-        callback(null,null);
+        console.log('non unique token created');
       }
     });
   });

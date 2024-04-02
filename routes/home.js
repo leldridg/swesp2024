@@ -7,12 +7,15 @@ router.get('/', function (req, res, next) {
 
   const token = req.query.session || null;
 
+  console.log(token);
+
   queries.fetchProducts((err, items) => {
     if (err) {
       console.error(err);
       return res.status(500).send('An error occurred');
     }
 
+    console.log(token);
     if(token == null){
       res.render('pages/home', { title: "Home!", items: items, token: null, admin:false});
 
