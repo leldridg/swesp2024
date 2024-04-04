@@ -39,8 +39,11 @@ router.get('/', function (req, res, next) {
             res.send("invalid session token ):");
           }
           if(exists){
-
-            res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin});
+            if(is_admin == null || is_admin == undefined){
+              return res.status(500).send('An error, your status is undefined');
+            } else {
+              res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin});
+            }
           }
         });
       }

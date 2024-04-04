@@ -4,30 +4,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Product</title>
   <link rel="stylesheet" href="/stylesheets/addProduct.css">
-  <%- include('../partials/head.ejs', {token:token}) %>
+  <%- include('../partials/head.ejs', {token:token, admin: false}) %>
 </head>
 <body>
   <div class="add-product-container">
-    <form class="add-product-form">
+    <form class="add-product-form" action="/add-product" method="post">
+      <input type="hidden" name="token" value= <%= token %> required>
+
       <div class="form-group">
-        <label for="product-name">Product Name:</label>
-        <input type="text" id="product-name" name="product-name">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" required>
       </div>
       <div class="form-group">
-        <label for="product-price">Price Per Unit:</label>
-        <input type="text" id="product-price" name="product-price" placeholder="$">
+        <label for="productPrice">Price Per Unit:</label>
+        <input type="text" id="productPrice" name="productPrice" placeholder="$" required>
       </div>
       <div class="form-group">
-        <label for="product-qty">Qty:</label>
-        <input type="number" id="product-qty" name="product-qty" value="1">
+        <label for="productQty">Qty:</label>
+        <input type="number" id="productQty" name="productQty" value="1" required>
       </div>
       <div class="form-group">
-        <label for="product-description">Description:</label>
-        <textarea id="product-description" name="product-description"></textarea>
+        <label for="productDescription">Description:</label>
+        <textarea id="productDescription" name="productDescription" required></textarea>
       </div>
       <div class="form-group">
-        <label for="product-picture">Picture:</label>
-        <input type="file" id="product-picture" name="product-picture">
+        <label for="productPicture">Picture:</label>
+        <input type="text" id="productPicture" name="productPicture" required>
       </div>
       <button type="submit" class="add-product-btn">Add Product</button>
     </form>

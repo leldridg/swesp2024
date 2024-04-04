@@ -15,6 +15,18 @@
 				</a>
 			</nav>
 		</div>
+		<% if (admin) { %>
+			<div class="logo">
+				<nav class="a">
+					<a href="/add-product<%= token ? '?session=' + token : '' %>" class="logo">
+						<img src="../images/logo.png" alt="Logo" class="top-left-image">
+					</a>
+				</nav>
+			</div>
+		<% } %>
+		
+
+		<% if (token == "" || token == undefined || token == null) { %>
 			<div class="action-items">
 			<div class="dropdown">
 				<button class="dropbtn">Sign In</button>
@@ -22,12 +34,22 @@
 					<a href="/create-account">Create Account</a>
 					<a href="/login">Log In</a>
 				</div>
-			</div>		
+			</div>
+		<% } else { %>
+			<div class="action-items">
+			<a href="/">Log Out</a>
+			</div>
+		<% } %>
+
+
+			<% if (!admin) { %>
+		
 			<nav class="user-navigation">
 				<a href="/cart<%= token ? '?session=' + token : '' %>" class="cart">
 					<img src="../images/shopping-cart.png" alt="">
 				</a>
 			</nav>
+			<% } %>
 	</header>
 </body>
 </html>
