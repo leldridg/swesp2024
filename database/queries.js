@@ -337,7 +337,6 @@ function adminFromUID(user_id, callback) {
     if(result.rows[0].is_admin == undefined) {
       return callback(null, false, null);
     }
-    console.log("isadmin value " + result.rows[0 ].is_admin)
     callback(null, true, result.rows[0].is_admin);
   });
 }

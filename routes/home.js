@@ -31,7 +31,6 @@ router.get('/', function (req, res, next) {
       }
       if(exists){
         queries.adminFromUID(user_id, (err, exists, is_admin) => {
-          console.log("admin " + is_admin);
           if (err) {
             console.error(err);
             return res.status(500).send('An error occurred');
@@ -40,8 +39,6 @@ router.get('/', function (req, res, next) {
             res.send("invalid session token ):");
           }
           if(exists){
-            console.log("abc" + is_admin);
-
             if(is_admin == null || is_admin == undefined){
               return res.status(500).send('An error, your status is undefined');
             } else {
