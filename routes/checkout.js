@@ -6,16 +6,22 @@ const func = require('../database/isTokenAdmin');
 
 router.get('/', function (req, res, next) {
   if (Object.keys(req.query).length != 0) {
-    func.isTokenAdmin(req.query.session, (err, exists, is_admin) => {
+
+    const token = req.query.session || null;
+
+    if(token == null || token == undefined || token == ""){
+      res.send("invalid session token ):");
+    }
+    func.isTokenAdmin(token, (err, exists, is_admin) => {
       if (err) { return next(err); }
       if (exists && is_admin) {
-        res.redirect(`/?session=${req.query.session}`);
+        res.redirect(`/?session=${token}`);
       } else {
-        res.render('pages/checkout');
+        res.render('pages/checkout', {admin: false, token: token});
       }
     });
   } else {
-    res.render('pages/checkout');
+    res.send("invalid session token ):");
   }
 });
 

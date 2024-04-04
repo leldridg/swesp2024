@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) { // Include 'next' in the function pa
 
     if (taken || username.includes("guest")) {  
       // Username already taken, render the page with a flag and the submitted password
-      res.render('pages/create-account', {taken: true, password: password});
+      res.render('pages/create-account', {taken: true, password: password, admin: false});
     } else {
       
       queries.createAccount(username, password, (err, success) => {

@@ -3,14 +3,16 @@ var express = require('express');
 var router = express.Router();
 const queries = require('../database/queries');
 const guestAccount = require('../database/guestAccount');
+const isAdmin = require('../database/isTokenAdmin');
 
 router.get('/', function (req, res, next) {
-  res.render('pages/view-product');
+  // res.render('pages/view-product');
+  return res.status(404).send('Product not found');
 });
 
 router.get('/:productId', (req, res) => {
   productId = req.params.productId;
-  token = req.query.session;
+  token = req.query.session || null;
 
   queries.productInfoFromPID(productId, (err, item) => {
     if (err) {
@@ -22,9 +24,26 @@ router.get('/:productId', (req, res) => {
       return res.status(404).send('Product not found');
     }
 
-    // Render the view-product.ejs template with the item object
-    res.render('pages/view-product', { item: item, productId: productId, token: token });
+    if(token == null || token == undefined || token == ""){
 
+    res.render('pages/view-product', { item: item, productId: productId, token: token, admin: false });
+
+    } else {
+      isAdmin.isTokenAdmin(token, (err, exists, is_admin) => {
+        if(err){
+          next(err);
+        }
+        if(!exists){
+          res.send("invalid session token ):");
+        } else {
+          if(is_admin){
+            res.render('pages/view-product', { item: item, productId: productId, token: token, admin : true });
+          } else {
+            res.render('pages/view-product', { item: item, productId: productId, token: token, admin: false });
+          }
+        }
+    });
+    }
   });
 });
 

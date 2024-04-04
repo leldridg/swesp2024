@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
     if(err){ next(err) }
     if(exists) {
       if(is_admin){
-        res.render('pages/add-product', {token : token});
+        res.render('pages/add-product', {token : token, admin: true});
       } else {
         res.redirect(`/?session=${token}`);
       }
