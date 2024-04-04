@@ -9,7 +9,7 @@
 <body>
   <div class="add-product-container">
     <form class="add-product-form" action="/add-product" method="post">
-      <input type="hidden" name="token" value= <%= token %>>
+      <input type="hidden" name="token" value= <%= token %> required>
 
       <div class="form-group">
         <label for="productName">Product Name:</label>
