@@ -1,60 +1,60 @@
-const queries = require('../database/queries.js');
-const db = require('../database/db.js');
+// const queries = require('../database/queries.js');
+// const db = require('../database/db.js');
 
-//describe('testing queries, which expect good inputs', () => {
+// //describe('testing queries, which expect good inputs', () => {
 
-    //test product details
-    let product_id = null;
-    const name = 'Dev Test Product';
-    const img = 'https://cs.trinity.edu/~leldridg/images/logo.jpeg';
-    const price = 10.99;
-    const quantity = 5;
-    const desc = 'This is a decsription for a test product.';
+//     //test product details
+//     let product_id = null;
+//     const name = 'Dev Test Product';
+//     const img = 'https://cs.trinity.edu/~leldridg/images/logo.jpeg';
+//     const price = 10.99;
+//     const quantity = 5;
+//     const desc = 'This is a decsription for a test product.';
 
 
-    //add test product to database
-    //use fetchProducts to see that new item is there, to get product_id and quantity
-    console.log('addProduct should add a product to the product table');
-        //add product
-        queries.addProduct(name, img, price, quantity, desc, (err) => {
-            //ensure addProduct succeeds
-            if (err != null) { console.error('addProduct query did not succeed in addProduct test'); process.exit(1); } 
+//     //add test product to database
+//     //use fetchProducts to see that new item is there, to get product_id and quantity
+//     console.log('addProduct should add a product to the product table');
+//         //add product
+//         queries.addProduct(name, img, price, quantity, desc, (err) => {
+//             //ensure addProduct succeeds
+//             if (err != null) { console.error('addProduct query did not succeed in addProduct test'); process.exit(1); } 
 
-            console.log('help');
-            queries.fetchProducts((err, products) => {
-                //ensure fetchProducts succeeds
-                if (err != null) { console.error('fetchProducts query did not succeed in addProduct test'); process.exit(1); } 
+//             console.log('help');
+//             queries.fetchProducts((err, products) => {
+//                 //ensure fetchProducts succeeds
+//                 if (err != null) { console.error('fetchProducts query did not succeed in addProduct test'); process.exit(1); } 
 
-                console.log('test');
-                //console.log(products);
+//                 console.log('test');
+//                 //console.log(products);
 
-                //find the newly added product in the product list
-                const addedProduct = products.find(product => product.name === name);
+//                 //find the newly added product in the product list
+//                 const addedProduct = products.find(product => product.name === name);
 
-                //assert product has the right details
-                if (addedProduct === undefined) { console.error('addedProduct is not defined in addProduct test'); process.exit(1); }
-                if (addedProduct.name != name) { console.error('addedProduct does not have correct name in addProduct test'); process.exit(1); }
-                if (addedProduct.img != img) { console.error('addedProduct does not have correct img in addProduct test'); process.exit(1); }
-                if (addedProduct.price != price) { console.error('addedProduct does not have correct price in addProduct test'); process.exit(1); }
-                if (addedProduct.quantity != quantity) { console.error('addedProduct does not have correct quantity in addProduct test'); process.exit(1); }
-                if (addedProduct.desc != desc) { console.error('addedProduct does not have correct desc in addProduct test'); process.exit(1); }
+//                 //assert product has the right details
+//                 if (addedProduct === undefined) { console.error('addedProduct is not defined in addProduct test'); process.exit(1); }
+//                 if (addedProduct.name != name) { console.error('addedProduct does not have correct name in addProduct test'); process.exit(1); }
+//                 if (addedProduct.img != img) { console.error('addedProduct does not have correct img in addProduct test'); process.exit(1); }
+//                 if (addedProduct.price != price) { console.error('addedProduct does not have correct price in addProduct test'); process.exit(1); }
+//                 if (addedProduct.quantity != quantity) { console.error('addedProduct does not have correct quantity in addProduct test'); process.exit(1); }
+//                 if (addedProduct.desc != desc) { console.error('addedProduct does not have correct desc in addProduct test'); process.exit(1); }
 
-                //ensure product_id is present
-                if (addedProduct.product_id === undefined) { console.error('addedProduct.product_id is not defined in addProduct test'); process.exit(1); }
+//                 //ensure product_id is present
+//                 if (addedProduct.product_id === undefined) { console.error('addedProduct.product_id is not defined in addProduct test'); process.exit(1); }
 
-                console.log(addedProduct.product_id);
+//                 console.log(addedProduct.product_id);
                 
-                //set undefined global test var
-                //product_id = addedProduct.product_id;
+//                 //set undefined global test var
+//                 //product_id = addedProduct.product_id;
 
-                //complete test
-                console.log('completed addProduct test');
-                return;
-            });
-        });
-   // });
+//                 //complete test
+//                 console.log('completed addProduct test');
+//                 return;
+//             });
+//         });
+//    // });
 
-    console.log('Updated test product_id: ' + product_id);
+//     console.log('Updated test product_id: ' + product_id);
 
     // console.log('Product ID: ' + product_id);
 
