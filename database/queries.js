@@ -53,6 +53,7 @@ function addProduct(name, img, price, quantity, desc, callback) {
   `
   db.query(sql, (err) => {
     if (err) {return callback(err); }
+    callback(null);
   });
 }
 
