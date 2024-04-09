@@ -396,5 +396,6 @@ module.exports = {
   cartItemsbyUID,
   productInfoFromPID,
   adminFromUID,
-  addItemToCart
+  addItemToCart,
+  updateProd
 };

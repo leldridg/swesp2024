@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 const queries = require('../database/queries');
 
-router.post('/update-product/:id', (req, res) => {
+router.post('/:id', (req, res) => {
     const productId = req.params.id;
     const name = req.params.name;
     const price = req.params.price;
     const description = req.params.description;
     const image = req.params.image;
     const quantity = req.params.quantity;
+    
+    console.log("constants are set!");
 
   
     queries.updateProd(name, price, description, image, quantity, productId, (err, result) => {
