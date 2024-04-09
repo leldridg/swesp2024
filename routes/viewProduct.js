@@ -45,7 +45,6 @@ router.get('/:productId', (req, res) => {
 router.post('/', function (req, res, next) {
   const { productId, quantity, token } = req.body; // Extracting username and password from the form submission
 
-
   if (token == "" || token == null || token == undefined) {
 
     guestAccount.guestAccount(productId, quantity, (err, genToken) => { 
