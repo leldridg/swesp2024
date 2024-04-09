@@ -25,8 +25,9 @@ router.get('/:productId', (req, res) => {
 
     // Render the view-product.ejs template with the item object
     res.render('pages/edit-product', { item: item, productId: productId, token:token });
-
   });
+
+});
 
 
 // Error-handling middleware
