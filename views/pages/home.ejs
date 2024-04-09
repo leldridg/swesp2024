@@ -10,11 +10,7 @@
 </head>
 <body>
   <h1><%= title %></h1>
-  <% if (message !== null && message != "") { %>
-    <script>
-        alert("<%= message %>");
-    </script>
-    <% } %>
+
   <% if (items && items.length > 0) { %>
     <div class="product-grid">
       <% items.forEach(function(item) { %>
@@ -36,6 +32,12 @@
   <% } else { %>
     <p>No items to display.</p>
   <% } %>
+
+  <% if (message !== null) { %>
+    <script>
+        alert("<%= message %>");
+    </script>
+    <% } %>
 
   <img src="/images/cow.gif">
 
