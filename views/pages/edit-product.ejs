@@ -31,7 +31,8 @@
       <textarea id="product-description" name="description"><%= item.description %></textarea>
     </div>
     <input type="hidden" name="productId" value= <%= productId %>>
-    
+    <input type="hidden" name="token" value= <%= token %>>
+
     <div class="product-actions">
       <input type="submit" class="btn save-changes" value="Save Changes">
       <button type="button" class="btn delete-product">Delete Product</button>

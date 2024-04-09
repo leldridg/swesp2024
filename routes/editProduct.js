@@ -7,18 +7,15 @@ const func = require('../database/isTokenAdmin');
 
 router.get('/', function (req, res, next) {
 
-  // res.render('pages/edit-product');
   return res.status(405).send('Include a product id');
 });
 
-router.get('/:productId', (req, res) => {
+router.get('/:productId', (req, res, next) => {
   productId = req.params.productId;
   token = req.query.session;
 
   queries.productInfoFromPID(productId, (err, item) => {
     if (err) {
-      // console.error(err);
-      // return res.status(500).send('An error occurred');
       return next(err);
     }
     if (!item) {
@@ -44,16 +41,15 @@ router.get('/:productId', (req, res) => {
 
 });
 
-router.post('/:id', (req, res) => {
+router.post('/:id', (req, res, next) => {
 
-  const {productId, name, price, description, image, quantity} = req.body
+  const {productId, name, price, description, image, quantity, token} = req.body
 
   queries.updateProd(name, price, description, image, quantity, productId, (err, result) => {
     if (err) {
       return next(err)
-      // return res.status(500).json({ success: false, message: 'Error updating product', error: err.message });
     } else {
-      res.json({ success: true, message: 'Product updated successfully', result: result });
+      res.redirect(`/?session=${token}&message=${"added sucessfully!"}`);
     }
   });
 });

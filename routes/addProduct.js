@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
 
   const { token, productName, productPrice, productQty, productDescription, productPicture} = req.body; // Extracting username and password from the form submission
 

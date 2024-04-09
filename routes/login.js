@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
   res.render('pages/login');
 });
 
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
 
   const { username, password } = req.body; // Extracting username and password from the form submission
 

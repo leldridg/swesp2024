@@ -42,7 +42,7 @@ router.get('/:productId', (req, res) => {
   });
 });
 
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
   const { productId, quantity, token } = req.body; // Extracting username and password from the form submission
 
 
@@ -62,8 +62,6 @@ router.post('/', function (req, res) {
       if (exists) {
         queries.addItemToCart(user_id, productId, quantity, (err) => {
           if (err) {
-            // console.log(err)
-            // return res.status(500).send('An error occurred');
             return next(err);
           } else {
             res.redirect(`/?session=${token}`);

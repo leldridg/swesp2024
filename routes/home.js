@@ -6,6 +6,7 @@ const queries = require('../database/queries');
 router.get('/', function (req, res, next) {
 
   const token = req.query.session || null;
+  const message = req.query.message || null;
 
   queries.fetchProducts((err, items) => {
     if (err) {
@@ -13,7 +14,7 @@ router.get('/', function (req, res, next) {
     }
 
     if(token == null){
-      res.render('pages/home', { title: "Home!", items: items, token: null, admin:false});
+      res.render('pages/home', { title: "Home!", items: items, token: null, admin:false, message:""});
     }
     else {
      queries.uidFromSID(token, (err, exists, user_id) => {
@@ -36,7 +37,7 @@ router.get('/', function (req, res, next) {
             if(is_admin == null || is_admin == undefined){
               return res.status(500).send('An error, your status is undefined');
             } else {
-              res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin});
+              res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin, message : message});
             }
           }
         });
