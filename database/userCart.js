@@ -2,7 +2,7 @@
 const queries = require('../database/queries');
 
 function getUserCart(user_id, callback) {
-  queries.cartItemsbyUID(user_id, (err,cartItems) => {
+  queries.cartItemsbyUID(user_id, (err, cartItems) => {
     if (err) {
       return callback(err);
     }
@@ -27,8 +27,8 @@ function getUserCart(user_id, callback) {
           return callback(err);
         }
 
-        
-        if(!item.quantity){
+
+        if (!item.quantity) {
           value.quantity = 1;
         } else {
           value.quantity = item.quantity;

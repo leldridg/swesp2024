@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../partials/head.ejs', {token: token, admin:false}) %>
+<%- include('../partials/head.ejs', {token: token, admin:false}) %>
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Product - <% item.name %></title>
+    <title>View Product - <% item.name %>
+    </title>
     <link rel="stylesheet" href="/stylesheets/viewProduct.css">
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="product-container">
-        <div class="product-details">
-            <h1><%= item.name %></h1>
-            <div class="product-image">
-                <img src="<%= item.image %>" style="max-width: 400px; height: auto;">
-            </div>
-            <p class="price">$<%= item.price %></p>
-            <% if (item.quantity > 0) { %>
-                <p class="stock-status">Currently in Stock!</p>
-            <% } else { %>
-                <p class="stock-status">Out of Stock</p>
+      <div class="product-details">
+        <h1>
+          <%= item.name %>
+        </h1>
+        <div class="product-image">
+          <img src="<%= item.image %>" style="max-width: 400px; height: auto;">
+        </div>
+        <p class="price">$<%= item.price %>
+        </p>
+        <% if (item.quantity> 0) { %>
+          <p class="stock-status">Currently in Stock!</p>
+          <% } else { %>
+            <p class="stock-status">Out of Stock</p>
             <% } %>
             <form class="login-form" action="/view-product" method="post">
-                    <label for="quantity">Qty:</label>
-                    <input type="number" name="quantity" id="quantity" value=1 />
+                <label for="quantity">Qty:</label>
+                <input type="number" name="quantity" id="quantity" value=1 />
                 <br>
-                <input type="hidden" name="token" value= <%= token %>>
-                <input type="hidden" name="productId" value= <%= productId %>>
-             <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                <input type="hidden" name="token" value=<%=token %>>
+                <input type="hidden" name="productId" value=<%=productId %>>
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
             </form>
-            <p class="product-description"><%= item.description %></p>
-        </div>
+            <p class="product-description">
+                <%= item.description %>
+            </p>
+      </div>
     </div>
-</body>
+  </body>
+
 </html>

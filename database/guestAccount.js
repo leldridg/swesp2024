@@ -32,16 +32,16 @@ function guestAccount(productId, quantity, callback) {
           if (err) { return callback(err, null) }
 
           // queries.uidFromSID(token, (err, exists, user_id) => {
-            queries.idByUsername(username, (err, user_id) => {
-              if (err) { return callback(err, null); }
-                queries.addItemToCart(user_id, productId, quantity, (err) => {
-                if (err) {
-                  console.log(err)
-                  return callback(err,null);
-                } else {
-                  callback(null, token)
-                }
-              });
+          queries.idByUsername(username, (err, user_id) => {
+            if (err) { return callback(err, null); }
+            queries.addItemToCart(user_id, productId, quantity, (err) => {
+              if (err) {
+                console.log(err)
+                return callback(err, null);
+              } else {
+                callback(null, token)
+              }
+            });
           });
         });
       });

@@ -21,17 +21,17 @@ router.get('/:productId', (req, res) => {
       return res.status(404).send('Product not found');
     }
 
-    if(token == null || token == undefined || token == ""){
+    if (token == null || token == undefined || token == "") {
 
-    res.render('pages/view-product', { item: item, productId: productId, token: token, admin: false });
+      res.render('pages/view-product', { item: item, productId: productId, token: token, admin: false });
 
     } else {
       isAdmin.isTokenAdmin(token, (err, exists, is_admin) => {
-        if(err){ return next(err); }
-        if(!exists){
+        if (err) { return next(err); }
+        if (!exists) {
           res.send("invalid session token ):");
         } else {
-          if(is_admin){
+          if (is_admin) {
             // res.redirect(`/?session=${token}`);
 
             res.redirect(`/edit-product/${productId}?session=${token}`);
@@ -39,7 +39,7 @@ router.get('/:productId', (req, res) => {
             res.render('pages/view-product', { item: item, productId: productId, token: token, admin: false });
           }
         }
-    });
+      });
     }
   });
 });
@@ -49,7 +49,7 @@ router.post('/', function (req, res, next) {
 
   if (token == "" || token == null || token == undefined) {
 
-    guestAccount.guestAccount(productId, quantity, (err, genToken) => { 
+    guestAccount.guestAccount(productId, quantity, (err, genToken) => {
       res.redirect(`/?session=${genToken}`);
     });
   } else {

@@ -6,17 +6,17 @@ const queries = require('../database/queries');
 //callback: err, exists, is_admin
 
 function isTokenAdmin(session_id, callback) {
-    queries.uidFromSID(session_id, (err, exists, user_id) => {
-        if (err) { return callback(err, null, null) }
+  queries.uidFromSID(session_id, (err, exists, user_id) => {
+    if (err) { return callback(err, null, null) }
 
-        //if user_id doesn't exist in session table, can't use it to check account table
-        //assume user doesn't exist in account table
-        if (!exists) { return callback(err, false, null) }
+    //if user_id doesn't exist in session table, can't use it to check account table
+    //assume user doesn't exist in account table
+    if (!exists) { return callback(err, false, null) }
 
-        queries.adminFromUID(user_id, (err, exists, is_admin) => {
-            callback(err, exists, is_admin) //only line that is needed given error handling in function?
-        });
+    queries.adminFromUID(user_id, (err, exists, is_admin) => {
+      callback(err, exists, is_admin) //only line that is needed given error handling in function?
     });
+  });
 }
 
 module.exports = { isTokenAdmin }

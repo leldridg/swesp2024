@@ -13,39 +13,39 @@ router.get('/', function (req, res, next) {
       return next(err);
     }
 
-    if(token == null){
-      res.render('pages/home', { title: "Home!", items: items, token: null, admin:false, message:""});
+    if (token == null) {
+      res.render('pages/home', { title: "Home!", items: items, token: null, admin: false, message: "" });
     }
     else {
-     queries.uidFromSID(token, (err, exists, user_id) => {
-      if (err) {
-        return next(err);
-      }
+      queries.uidFromSID(token, (err, exists, user_id) => {
+        if (err) {
+          return next(err);
+        }
 
-      if(!exists){
-        res.send("invalid session token ):");
-      }
-      if(exists){
-        queries.adminFromUID(user_id, (err, exists, is_admin) => {
-          if (err) {
-            return next(err);
-          }
-          if(!exists){
-            res.send("invalid session token ):");
-          }
-          if(exists){
-            if(is_admin == null || is_admin == undefined){
-              return res.status(500).send('An error, your status is undefined');
-            } else {
-              res.render('pages/home', { title: "Home!", items: items, token: token, admin:is_admin, message : message});
+        if (!exists) {
+          res.send("invalid session token ):");
+        }
+        if (exists) {
+          queries.adminFromUID(user_id, (err, exists, is_admin) => {
+            if (err) {
+              return next(err);
             }
-          }
-        });
-      }
-    });
-  }
+            if (!exists) {
+              res.send("invalid session token ):");
+            }
+            if (exists) {
+              if (is_admin == null || is_admin == undefined) {
+                return res.status(500).send('An error, your status is undefined');
+              } else {
+                res.render('pages/home', { title: "Home!", items: items, token: token, admin: is_admin, message: message });
+              }
+            }
+          });
+        }
+      });
+    }
   });
-  
+
 });
 
 // Error-handling middleware
