@@ -10,6 +10,23 @@
 
 const db = require('../database/db.js'); // Adjust the path as necessary
 
+// update product
+// takes name, price, description, image, quantity, product_id
+function updateProd(name, price, description, image, quantity, product_id, callback) {
+
+  let sql =
+  `
+  UPDATE product 
+  SET name = '${name}', price = '${price}', description = '${description}', image = '${image}', quantity = '${quantity}'
+  WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err); }
+
+    else { callback(null); }
+  });
+}
+
 // update available quantity of specified product
 // takes product_id, quantity
 function updateProdQuantity(product_id, quantity, callback) {
@@ -396,5 +413,6 @@ module.exports = {
   cartItemsbyUID,
   productInfoFromPID,
   adminFromUID,
-  addItemToCart
+  addItemToCart,
+  updateProd
 };
