@@ -14,31 +14,33 @@ router.get('/:productId', (req, res, next) => {
   productId = req.params.productId;
   token = req.query.session;
 
-  queries.productInfoFromPID(productId, (err, item) => {
-    if (err) {
-      return next(err);
-    }
-    if (!item) {
-      return res.status(404).send('Product not found');
-    }
-    if(token == null || token == undefined || token == ""){
+  if(token == null || token == undefined || token == ""){
+    res.send("invalid session token ):");
+  } else {
+
+  func.isTokenAdmin(token, (err, exists, is_admin) => {
+    if(!exists){
       res.send("invalid session token ):");
     }
-    func.isTokenAdmin(token, (err, exists, is_admin) => {
-      if(!exists){
-        res.send("invalid session token ):");
-      }
-      if(!is_admin){
-        res.send("invalid session token - non admin user");
-      } else {
-        res.render('pages/edit-product', { item: item, productId: productId, token:token, admin : is_admin });
+    if(!is_admin){
+      // res.send("invalid session token - non admin user");
+      res.redirect(`/view-product/${productId}?session=${token}`);
 
-      }
+    } else {
+      queries.productInfoFromPID(productId, (err, item) => {
+        if (err) {
+          return next(err);
+        }
+        if (!item) {
+          return res.status(404).send('Product not found');
+        }
+
+        res.render('pages/edit-product', { item: item, productId: productId, token:token, admin : is_admin });
     });
 
-    // Render the view-product.ejs template with the item object
+    }
   });
-
+}
 });
 
 router.post('/:id', (req, res, next) => {

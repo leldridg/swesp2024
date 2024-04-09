@@ -32,7 +32,9 @@ router.get('/:productId', (req, res) => {
           res.send("invalid session token ):");
         } else {
           if(is_admin){
-            res.render('pages/view-product', { item: item, productId: productId, token: token, admin : true });
+            // res.redirect(`/?session=${token}`);
+
+            res.redirect(`/edit-product/${productId}?session=${token}`);
           } else {
             res.render('pages/view-product', { item: item, productId: productId, token: token, admin: false });
           }

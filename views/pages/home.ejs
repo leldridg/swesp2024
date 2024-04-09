@@ -33,7 +33,7 @@
     <p>No items to display.</p>
   <% } %>
 
-  <% if (message !== null) { %>
+  <% if (message !== null && message != "") { %>
     <script>
         alert("<%= message %>");
     </script>
