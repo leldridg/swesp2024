@@ -43,6 +43,4 @@ router.use((err, req, res, next) => {
   res.status(statusCode).json({ error: message });
 });
 
-
-
 module.exports = router;
