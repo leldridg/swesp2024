@@ -7,8 +7,6 @@ router.get('/', function (req, res, next) {
 
   const token = req.query.session || null;
 
-  console.log(token);
-
   queries.fetchProducts((err, items) => {
     if (err) {
       console.error(err);

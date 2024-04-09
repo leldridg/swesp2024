@@ -12,7 +12,7 @@
             <h1><%= item.name %></h1>
             <div class="product-image">
                 <img src="<%= item.image %>" style="max-width: 400px; height: auto;">
-            </div>            
+            </div>
             <p class="price">$<%= item.price %></p>
             <% if (item.quantity > 0) { %>
                 <p class="stock-status">Currently in Stock!</p>
@@ -22,12 +22,7 @@
             <form class="login-form" action="/view-product" method="post">
                 <div class="quantity-selector">
                     <label for="quantity">Qty:</label>
-                    <select id="quantity" name="quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <!-- Adjust quantity options based on product availability or omit if not applicable -->
-                    </select>
+                    <input id="quantity" type="number" value=1 />
                 </div>
                 <input type="hidden" name="token" value= <%= token %>>
                 <input type="hidden" name="productId" value= <%= productId %>>

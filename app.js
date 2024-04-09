@@ -9,6 +9,7 @@ const addProduct = require("./routes/addProduct.js");
 const editProduct = require("./routes/editProduct.js");
 const viewProduct = require("./routes/viewProduct.js");
 const shoppingCart = require("./routes/shoppingCart.js");
+const updateProduct = require("./routes/updateProduct.js");
 
 
 
@@ -35,6 +36,7 @@ app.use("/add-product", addProduct);
 app.use("/view-product", viewProduct);
 app.use("/edit-product", editProduct);
 app.use("/cart", shoppingCart);
+app.use("/update-product", updateProduct);
 
 app.listen(port, function () {
   console.log(`SWE SP 2024 app listening on port  ${port}!`);
