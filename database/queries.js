@@ -13,6 +13,9 @@ const db = require('../database/db.js'); // Adjust the path as necessary
 // update product
 // takes name, price, description, image, quantity, product_id
 function updateProd(name, price, description, image, quantity, product_id, callback) {
+
+  console.log(price);
+  console.log(name);
   let sql =
   `
   UPDATE product 
