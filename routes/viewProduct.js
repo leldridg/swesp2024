@@ -6,7 +6,6 @@ const guestAccount = require('../database/guestAccount');
 const isAdmin = require('../database/isTokenAdmin');
 
 router.get('/', function (req, res, next) {
-  // res.render('pages/view-product');
   return res.status(404).send('Product not found');
 });
 
