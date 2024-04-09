@@ -35,8 +35,6 @@ router.get('/', function (req, res, next) {
                 res.redirect(`/?session=${token}`);
               }
             });
-
-            // res.render('pages/cart', { title: username, items: items, token:req.query.session});
           });
         });
       } else {

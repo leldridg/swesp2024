@@ -8,10 +8,11 @@ router.post('/:id', (req, res) => {
   
     queries.updateProd(name, price, description, image, quantity, productId, (err, result) => {
       if (err) {
-        // If an error occurs, send a 500 status code and the error message
-        return res.status(500).json({ success: false, message: 'Error updating product', error: err.message });
+        return next(err)
+        // return res.status(500).json({ success: false, message: 'Error updating product', error: err.message });
+      } else {
+        res.json({ success: true, message: 'Product updated successfully', result: result });
       }
-      res.json({ success: true, message: 'Product updated successfully', result: result });
     });
   });
 

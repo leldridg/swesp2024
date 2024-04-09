@@ -9,21 +9,16 @@ router.get('/', function (req, res, next) {
 
   queries.fetchProducts((err, items) => {
     if (err) {
-      console.error(err);
-      return res.status(500).send('An error occurred');
+      return next(err);
     }
 
     if(token == null){
       res.render('pages/home', { title: "Home!", items: items, token: null, admin:false});
-
     }
     else {
-
-    
-    queries.uidFromSID(token, (err, exists, user_id) => {
+     queries.uidFromSID(token, (err, exists, user_id) => {
       if (err) {
-        console.error(err);
-        return res.status(500).send('An error occurred');
+        return next(err);
       }
 
       if(!exists){
@@ -32,8 +27,7 @@ router.get('/', function (req, res, next) {
       if(exists){
         queries.adminFromUID(user_id, (err, exists, is_admin) => {
           if (err) {
-            console.error(err);
-            return res.status(500).send('An error occurred');
+            return next(err);
           }
           if(!exists){
             res.send("invalid session token ):");

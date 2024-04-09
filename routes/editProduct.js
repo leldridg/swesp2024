@@ -15,11 +15,11 @@ router.get('/:productId', (req, res) => {
 
   queries.productInfoFromPID(productId, (err, item) => {
     if (err) {
-      console.error(err);
-      return res.status(500).send('An error occurred');
+      // console.error(err);
+      // return res.status(500).send('An error occurred');
+      return next(err);
     }
     if (!item) {
-      // No product found for the given ID
       return res.status(404).send('Product not found');
     }
 
