@@ -56,6 +56,19 @@ function addProduct(name, img, price, quantity, desc, callback) {
   });
 }
 
+function updateItemQuantity(item_id, quantity, callback) {
+  let sql =
+  `
+  UPDATE cart_item
+  SET quantity = '${quantity}'
+  WHERE item_id = '${item_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) {return callback(err); }
+    callback(null);
+  })
+}
+
 // delete an item from cart_item based on item_id
 // takes: item_id
 // returns: nothing
@@ -149,7 +162,7 @@ function createAccount(username, password, callback) {
     `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null); }
-    callback(null)
+    callback(null);
   });
 }
 
@@ -245,7 +258,7 @@ function insertToken(session_id, user_id, callback) {
     `
   db.query(sql, (err) => {
     if (err) { return callback(err, null); }
-    callback(null)
+    callback(null);
   });
 }
 
@@ -362,6 +375,7 @@ function addItemToCart(user_id, product_id, quantity, callback){
 
 module.exports = {
   updateProdQuantity,
+  updateItemQuantity,
   getProdQuantity,
   addProduct,
   deleteItemByIID,
