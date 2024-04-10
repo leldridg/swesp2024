@@ -23,6 +23,7 @@
         <div class="cart-items">
             <h1><%= title.includes('guest') ? 'Guest' : title %>'s Shopping Cart</h1>
             <% if (items && items.length > 0) { %>
+                <% items.sort((a, b) => a.name.localeCompare(b.name)); %>
                 <% items.forEach(function(item) { %>
                     <div class="cart-item">
                         <% if (item.image) { %>

@@ -39,7 +39,6 @@ function getUserCart(user_id, callback) {
 
         if (completedRequests === cartItems.length) {
           // All requests have completed successfully
-          items.sort((a, b) => a.name.localeCompare(b.name));
           callback(null, items);
         }
       });
