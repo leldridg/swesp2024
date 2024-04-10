@@ -388,6 +388,21 @@ function addItemToCart(user_id, product_id, quantity, callback) {
   });
 }
 
+function addChangeLog(type, product_id, user_id, callback){
+
+  let sql =
+    `
+    INSERT INTO account (timestamp, type, product_id, user_id)
+    VALUES (NOW(), '${type}', '${product_id}', '${user_id}');
+    `
+
+  db.query(sql, (err, result) => {
+    if(err)  { return(callback(err)); }
+    else {
+      callback(null);
+    }
+  });
+}
 
 
 module.exports = {
