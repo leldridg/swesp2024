@@ -47,13 +47,38 @@ router.post('/:id', (req, res, next) => {
 
   const { productId, name, price, description, image, quantity, token } = req.body
 
-  queries.updateProd(name, price, description, image, quantity, productId, (err, result) => {
-    if (err) {
-      return next(err)
-    } else {
-      res.redirect(`/?session=${token}&message=${"added sucessfully!"}`);
+  func.isTokenAdmin(token, (err, exists, is_admin) => {
+    if (!exists) {
+      res.send("invalid session token ):");
     }
-  });
+    if (!is_admin) {
+      res.send("non admin token ):");
+      // res.redirect(`/view-product/${productId}?session=${token}`);
+    } else {
+      queries.updateProd(name, price, description, image, quantity, productId, (err, result) => {
+      if (err) {
+        return next(err);
+      } else {
+
+        queries.uidFromSID(token, (err, exists, user_id) => {
+          if(err){
+            return next(err);
+          }
+          if(!exists){
+            res.send("invalid session token ):");
+          } else {
+          queries.addChangeLog("edit", productId, user_id, (err) => {
+            if(err){
+              return next(err);
+            }
+          })
+        }
+          res.redirect(`/?session=${token}&message=${"added sucessfully!"}`);
+        });
+      }
+    });
+  }
+});
 });
 
 

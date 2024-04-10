@@ -392,7 +392,7 @@ function addChangeLog(type, product_id, user_id, callback){
 
   let sql =
     `
-    INSERT INTO account (timestamp, type, product_id, user_id)
+    INSERT INTO change_log (timestamp, type, product_id, user_id)
     VALUES (NOW(), '${type}', '${product_id}', '${user_id}');
     `
 
@@ -429,5 +429,6 @@ module.exports = {
   productInfoFromPID,
   adminFromUID,
   addItemToCart,
-  updateProd
+  updateProd,
+  addChangeLog
 };
