@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Product: <%= item.name %></title>
   <link rel="stylesheet" href="/stylesheets/editProduct.css">
-  <%- include('../partials/head.ejs', {token: token}) %>
+  <%- include('../partials/head.ejs', {token: token, admin : admin}) %>
 </head>
 <body>
-  <form id="edit-product-form" class="edit-product-container" action="/update-product/<%= productId %>" method="post">
+  <form id="edit-product-form" class="edit-product-container" action="/edit-product/<%= productId %>" method="post">
     <div class="product-image">
       <label for="product-image-url">Product Image URL:</label>
       <input type="text" id="product-image-url" name="image" value="<%= item.image %>">
@@ -31,7 +31,8 @@
       <textarea id="product-description" name="description"><%= item.description %></textarea>
     </div>
     <input type="hidden" name="productId" value= <%= productId %>>
-    
+    <input type="hidden" name="token" value= <%= token %>>
+
     <div class="product-actions">
       <input type="submit" class="btn save-changes" value="Save Changes">
       <button type="button" class="btn delete-product">Delete Product</button>

@@ -22,26 +22,26 @@ function guestAccount(productId, quantity, callback) {
   let password = "g" + extraPassword;
 
   queries.accountTaken(username, (err, taken) => {
-    if (err) { return next(err); }
+    if (err) { return callback(err, null); }
     if (taken) {
       console.log('non unique username');
     } else {
       queries.createAccount(username, password, (err, success) => {
-        if (err) { return next(err, null); }
+        if (err) { return callback(err, null); }
         generator.generateToken(username, (err, token) => {
-          if (err) { return next(err, null) }
+          if (err) { return callback(err, null) }
 
           // queries.uidFromSID(token, (err, exists, user_id) => {
-            queries.idByUsername(username, (err, user_id) => {
-              if (err) { return callback(err); }
-                queries.addItemToCart(user_id, productId, quantity, (err) => {
-                if (err) {
-                  console.log(err)
-                  return res.status(500).send('An error occurred');
-                } else {
-                  callback(null, token)
-                }
-              });
+          queries.idByUsername(username, (err, user_id) => {
+            if (err) { return callback(err, null); }
+            queries.addItemToCart(user_id, productId, quantity, (err) => {
+              if (err) {
+                console.log(err)
+                return callback(err, null);
+              } else {
+                callback(null, token)
+              }
+            });
           });
         });
       });

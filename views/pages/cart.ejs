@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
-    <%- include('../partials/head.ejs', {token: token, admin:false}) %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
+  <%- include('../partials/head.ejs', {token: token, admin:false}) %>
 </head>
 
-<% total = 0 %>
-
-
-    <% if (items && items.length > 0) { %>
-    <% items.forEach(function(item) {%>
-        <%  total += item.price * item.quantity;%>
-    <%  });%>
-    <% } %>
-
+<% total=0 %>
+<% if (items && items.length> 0) { %>
+  <% items.forEach(function(item) {%>
+    <% total +=item.price * item.quantity;%>
+  <% });%>
+<% } %>
 
 <body>
-    <div class="shopping-cart-container">
-        <div class="cart-items">
-            <h1><%= title.includes('guest') ? 'Guest' : title %>'s Shopping Cart</h1>
-            <% if (items && items.length > 0) { %>
-                <% items.forEach(function(item) { %>
-                    <div class="cart-item">
-                        <% if (item.image) { %>
-                            <img src=<%= item.image %> alt="Image" class="item-image">
-                        <% } else { %>
-                            <img src="/images/logo.png" alt="Image" class="item-image">
-                        <% } %>
+  <div class="shopping-cart-container">
+    <div class="cart-items">
+      <h1>
+        <%= title.includes('guest') ? 'Guest' : title %>'s Shopping Cart
+      </h1>
+      <% if (items && items.length> 0) { %>
+        <% items.forEach(function(item) { %>
+        <div class="cart-item">
+          <% if (item.image) { %>
+          <img src=<%=item.image %> alt="Image" class="item-image">
+          <% } else { %>
+            <img src="/images/logo.png" alt="Image" class="item-image">
+          <% } %>
 
-                        <div class="item-details">
-                            <p class="item-title"><%= item.name %></p>
-                            <p class="item-price">$<%= item.price.toFixed(2) %></p>
-                            <div class="item-quantity">
-                                <label for="quantity">Qty:</label>
-                                <input id="quantity" type="number" value=<%= item.quantity %> />
-                                <img src="/images/bin.png" alt="Remove item" class="remove-item">
-                            </div>
-                        </div>
-                    </div>
-                <% }); %>
-            <% } else { %>
-                <p>No items to display.</p>
+      <div class="item-details">
+        <p class="item-title">
+          <%= item.name %>
+        </p>
+        <p class="item-price">$<%= item.price.toFixed(2) %>
+        </p>
+        <div class="item-quantity">
+          <label for="quantity">Qty:</label>
+          <input id="quantity" type="number" value=<%=item.quantity %> />
+          <img src="/images/bin.png" alt="Remove item" class="remove-item">
+        </div>
+      </div>
+      </div>
+        <% }); %>
+          <% } else { %>
+            <p>No items to display.</p>
             <% } %>
-        </div>
+  </div>
 
-        <div class="order-summary">
-            <h2>Order Summary:</h2>
-            <p>Subtotal: $<%= total.toFixed(2) %></p>
-            <button class="checkout-btn">Proceed to Checkout:</button>
-        </div>
-    </div>
+  <div class="order-summary">
+    <h2>Order Summary:</h2>
+    <p>Subtotal: $<%= total.toFixed(2) %>
+    </p>
+    <button class="checkout-btn">Proceed to Checkout:</button>
+  </div>
+</div>
 </body>
+
 </html>

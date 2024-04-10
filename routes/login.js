@@ -9,18 +9,15 @@ router.get('/', function (req, res, next) {
   res.render('pages/login');
 });
 
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
 
   const { username, password } = req.body; // Extracting username and password from the form submission
 
   queries.loginValid(username, password, (err, valid) => {
-    if (err) { console.log(err); }
-
+    if (err) { return next(err) }
     if (valid) {
-
       generator.generateToken(username, (err, token) => {
-        if (err) { console.log(err); }
-
+        if (err) { return next(err) }
         res.redirect(`/?session=${token}`);
       });
 

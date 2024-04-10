@@ -7,9 +7,9 @@ const generator = require('../database/generateToken');
 
 
 router.get('/', function (req, res, next) {
-  res.render('pages/create-account', { taken: false } );
+  res.render('pages/create-account', { taken: false });
 });
-router.post('/', function(req, res, next) { // Include 'next' in the function parameters
+router.post('/', function (req, res, next) { // Include 'next' in the function parameters
 
   const { username, password } = req.body; // Extracting username and password from the form submission
 
@@ -17,11 +17,11 @@ router.post('/', function(req, res, next) { // Include 'next' in the function pa
   queries.accountTaken(username, (err, taken) => {
     if (err) { return next(err); }
 
-    if (taken || username.includes("guest")) {  
+    if (taken || username.includes("guest")) {
       // Username already taken, render the page with a flag and the submitted password
-      res.render('pages/create-account', {taken: true, password: password, admin: false});
+      res.render('pages/create-account', { taken: true, password: password, admin: false });
     } else {
-      
+
       queries.createAccount(username, password, (err, success) => {
         if (err) { return next(err); }
         // If the account is successfully created, send a success message
