@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
   token = req.query.session || null;
 
   if(Object.keys(req.query).length === 0){
-    res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null});
+    res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null, user_id: null});
   } else {
     queries.uidFromSID(req.query.session, (err, exists, user_id) => {
       if (err) { return next(err); }
@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
                 if(is_admin){
                   res.redirect(`/?session=${token}`);
                 } else {
-                  res.render('pages/cart', { title: username, items: items, token:req.query.session});
+                  res.render('pages/cart', { title: username, items: items, token:req.query.session, user_id: user_id});
                 }
               } else {
                 res.redirect(`/?session=${token}`);

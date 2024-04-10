@@ -22,13 +22,12 @@
                 <p class="stock-status">Out of Stock</p>
             <% } %>
             <form class="login-form" action="/view-product" method="post">
-                <div class="quantity-selector">
-                    <label for="quantity">Qty:</label>
-                    <input id="quantity" type="number" value=1 />
-                </div>
-                <input type="hidden" name="token" value= <%= token %>>
-                <input type="hidden" name="productId" value= <%= productId %>>
-             <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                <label for="quantity">Qty:</label>
+                <input type="number" name="quantity" id="quantity" value=1 />
+                <br>
+                <input type="hidden" name="token" value=<%=token %>>
+                <input type="hidden" name="productId" value=<%=productId %>>
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
             </form>
             <p class="product-description"><%= item.description %></p>
         </div>

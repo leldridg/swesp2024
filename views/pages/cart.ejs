@@ -37,7 +37,7 @@
                             <div class="item-quantity">
                                 <label for="quantity">Qty:</label>
                                 <input id="quantity" type="number" value=<%= item.quantity %> />
-                                <img src="/images/bin.png" alt="Remove item" class="remove-item">
+                                <img src="/images/bin.png" alt="Remove item" class="remove-item" data-pid="<%= item.product_id %>" data-uid="<%= user_id %>">
                             </div>
                         </div>
                     </div>
