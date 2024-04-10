@@ -36,8 +36,14 @@
                             <p class="item-price">$<%= item.price.toFixed(2) %></p>
                             <div class="item-quantity">
                                 <label for="quantity">Qty:</label>
-                                <input id="quantity" type="number" value=<%= item.quantity %> />
-                                <form class="delete-item" action="/cart" method="post">
+                                <!--<input id="quantity" type="number" value=<%= item.quantity %> />-->
+                                <form class="update-quantity" action="/cart/update-quantity" method="post">
+                                    <input id="quantity" type="number" name="quantity" value=<%= item.quantity %> onchange="this.form.submit()" />
+                                    <input type="hidden" name="token" value=<%=token %>>
+                                    <input type="hidden" name="uid" value=<%=user_id %>>
+                                    <input type="hidden" name="pid" value=<%=item.product_id %>>
+                                </form>
+                                <form class="delete-item" action="/cart/delete-item" method="post">
                                     <input type="hidden" name="token" value=<%=token %>>
                                     <input type="hidden" name="uid" value=<%=user_id %>>
                                     <input type="hidden" name="pid" value=<%=item.product_id %>>

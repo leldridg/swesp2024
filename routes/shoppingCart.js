@@ -46,13 +46,21 @@ router.get('/', function (req, res, next) {
   }
 });
 
-router.post('/', function (req, res) {
-  const { uid, pid, token } = req.body; //get user_id and product_id from form
+router.post('/delete-item', function (req, res) {
+  const { uid, pid, token } = req.body; //get user_id, product_id, and token from form
 
   queries.deleteItemByUIDPID(uid, pid, (err) => {
     res.redirect(`/cart/?session=${token}`);
   });
 
+});
+
+router.post('/update-quantity', function(req, res) {
+  const { quantity, uid, pid, token } = req.body; //get info from form
+
+  queries.updateItemQuantityByUIDPID(uid, pid, quantity, (err) => {
+    res.redirect(`/cart/?session=${token}`);
+  });
 });
 
 // Error-handling middleware
