@@ -35,7 +35,13 @@ router.get('/:productId', (req, res, next) => {
             return res.status(404).send('Product not found');
           }
 
-          res.render('pages/edit-product', { item: item, productId: productId, token: token, admin: is_admin });
+          queries.viewChangeLog(productId, (err, result) => {
+            if(err){
+              return next(err);
+            }
+            res.render('pages/edit-product', { item: item, productId: productId, token: token, admin: is_admin, change_log: result});
+            
+          });
         });
 
       }

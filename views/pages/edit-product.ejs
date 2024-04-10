@@ -38,5 +38,18 @@
       <button type="button" class="btn delete-product">Delete Product</button>
     </div>
   </form>
+  <% if (change_log && change_log.length > 0) { %>
+    <% change_log.forEach(function(change) { %>
+      <div class="bubble centered-text">
+        <p>Change ID: <%= change.change_id %></p>
+        <p>Timestamp: <%= change.timestamp %></p>
+        <p>Type: <%= change.type %></p>
+        <p>Product ID: <%= change.product_id %></p>
+        <p>User ID: <%= change.user_id %></p>
+      </div>
+    <% }) %>
+  <% } %>
+  
+  
 </body>
 </html>

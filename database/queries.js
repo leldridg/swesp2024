@@ -404,6 +404,21 @@ function addChangeLog(type, product_id, user_id, callback){
   });
 }
 
+function viewChangeLog(product_id, callback){
+  let sql =
+  `
+  SELECT change_id, timestamp, type, product_id, user_id
+  FROM change_log
+
+  WHERE product_id = '${product_id}';
+`
+  db.query(sql, (err, result) => {
+    if(err)  { return(callback(err, null)); }
+    else {
+      callback(null, result.rows);
+    }
+  });
+}
 
 module.exports = {
   updateProdQuantity,
@@ -430,5 +445,6 @@ module.exports = {
   adminFromUID,
   addItemToCart,
   updateProd,
-  addChangeLog
+  addChangeLog,
+  viewChangeLog
 };
