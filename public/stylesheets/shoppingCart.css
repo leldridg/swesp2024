@@ -62,10 +62,15 @@ body, html {
   margin-right: 10px;
 }
 
-.remove-item {
+.remove-item-btn {
   cursor: pointer;
   height: 20px;
   width: auto;
+}
+
+.remove-item-btn img {
+  height: 100%; /* Make sure the trash can icon fills the button */
+  width: auto; /* Allow the width to adjust proportionally */
 }
 
 .order-summary {

@@ -126,6 +126,7 @@ function deleteItemByUIDPID(user_id, product_id, callback) {
   db.query(sql, (err) => {
     if (err) { return callback(err); }
   });
+  callback(null);
 }
 
 // delete a product from product table pased on product_id

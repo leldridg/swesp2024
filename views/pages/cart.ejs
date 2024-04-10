@@ -37,7 +37,14 @@
                             <div class="item-quantity">
                                 <label for="quantity">Qty:</label>
                                 <input id="quantity" type="number" value=<%= item.quantity %> />
-                                <img src="/images/bin.png" alt="Remove item" class="remove-item" data-pid="<%= item.product_id %>" data-uid="<%= user_id %>">
+                                <form class="delete-item" action="/cart" method="post">
+                                    <input type="hidden" name="token" value=<%=token %>>
+                                    <input type="hidden" name="uid" value=<%=user_id %>>
+                                    <input type="hidden" name="pid" value=<%=item.product_id %>>
+                                    <button class="remove-item-btn" type="submit">
+                                        <img src="/images/bin.png" alt="Remove item" class="remove-item-icon">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

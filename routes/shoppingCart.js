@@ -46,6 +46,15 @@ router.get('/', function (req, res, next) {
   }
 });
 
+router.post('/', function (req, res) {
+  const { uid, pid, token } = req.body; //get user_id and product_id from form
+
+  queries.deleteItemByUIDPID(uid, pid, (err) => {
+    res.redirect(`/cart/?session=${token}`);
+  });
+
+});
+
 // Error-handling middleware
 router.use((err, req, res, next) => {
   console.error(err); // Log the error information for debugging purposes
