@@ -66,7 +66,8 @@ function addProduct(name, img, price, quantity, desc, callback) {
   let sql =
     `
   INSERT INTO product (name, image, is_deleted, thumbnail, price, quantity, description)
-  VALUES ('${name}', '${img}', 'false','${img}', '${price}', '${quantity}', '${desc}');
+  VALUES ('${name}', '${img}', 'false','${img}', '${price}', '${quantity}', '${desc}')
+  RETURNING product_id
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }

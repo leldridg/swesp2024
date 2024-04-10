@@ -46,24 +46,24 @@ router.post('/', function (req, res, next) {
           if (productName == "" || productPrice == "" || productPicture == "" || productQty == "" || productDescription == "") {
             res.redirect(`/add-product/?session=${token}`)
           } else {
-            queries.addProduct(productName, productPicture, productPrice, productQty, productDescription, (err) => {
+            queries.addProduct(productName, productPicture, productPrice, productQty, productDescription, (err, product_id) => {
               if (err) { next(err); }
-            });
-
-            queries.uidFromSID(token, (err, exists, user_id) => {
-                if(err){
-                  return next(err);
-                }
-                if(!exists){
-                  res.send("invalid session token ):");
-                } else {
-                queries.addChangeLog("edit", productId, user_id, (err) => {
+              queries.uidFromSID(token, (err, exists, user_id) => {
                   if(err){
                     return next(err);
                   }
-                })
-              }
+                  if(!exists){
+                    res.send("invalid session token ):");
+                  } else {
+                  queries.addChangeLog("edit", product_id, user_id, (err) => {
+                    if(err){
+                      return next(err);
+                    }
+                  })
+                }
+              });
             });
+
             res.redirect(`/?session=${token}`);
           }
         } else {
