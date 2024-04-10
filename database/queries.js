@@ -69,8 +69,10 @@ function addProduct(name, img, price, quantity, desc, callback) {
   VALUES ('${name}', '${img}', 'false','${img}', '${price}', '${quantity}', '${desc}')
   RETURNING product_id
   `
-  db.query(sql, (err) => {
-    if (err) { return callback(err); }
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err, null); }
+    if(result.rows.length == 0){ return callback("no product id returned", null);}
+    return callback(null, result.rows[0].product_id);
   });
 }
 

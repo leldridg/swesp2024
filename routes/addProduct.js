@@ -48,6 +48,7 @@ router.post('/', function (req, res, next) {
           } else {
             queries.addProduct(productName, productPicture, productPrice, productQty, productDescription, (err, product_id) => {
               if (err) { next(err); }
+
               queries.uidFromSID(token, (err, exists, user_id) => {
                   if(err){
                     return next(err);
@@ -55,7 +56,7 @@ router.post('/', function (req, res, next) {
                   if(!exists){
                     res.send("invalid session token ):");
                   } else {
-                  queries.addChangeLog("edit", product_id, user_id, (err) => {
+                  queries.addChangeLog("add", product_id, user_id, (err) => {
                     if(err){
                       return next(err);
                     }
