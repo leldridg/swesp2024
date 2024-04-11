@@ -63,3 +63,17 @@ body, html {
   text-decoration: underline;
   color: #333333;
 }
+
+.input-group.error input {
+  border-color: #ff4d4d; /* Red border for error */
+  background-color: #ffcccc; /* Light red background */
+}
+
+.error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  display: none; /* Hidden by default */
+}
