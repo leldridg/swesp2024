@@ -1,7 +1,7 @@
 body, html {
     font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 80px 0 0 0;
 }
 
 .site-header {
@@ -13,7 +13,10 @@ body, html {
     width: 100%;
     box-sizing: border-box;
     border-bottom: 2px solid #000;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .logo a.logo-link img {

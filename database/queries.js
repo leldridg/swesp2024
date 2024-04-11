@@ -10,17 +10,34 @@
 
 const db = require('../database/db.js'); // Adjust the path as necessary
 
+// update product
+// takes name, price, description, image, quantity, product_id
+function updateProd(name, price, description, image, quantity, product_id, callback) {
+
+  let sql =
+    `
+  UPDATE product 
+  SET name = '${name}', price = '${price}', description = '${description}', image = '${image}', quantity = '${quantity}'
+  WHERE product_id = '${product_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) { return callback(err); }
+
+    else { callback(null); }
+  });
+}
+
 // update available quantity of specified product
 // takes product_id, quantity
 function updateProdQuantity(product_id, quantity, callback) {
   let sql =
-  `
+    `
   UPDATE product
   SET quantity = '${quantity}'
   WHERE product_id = '${product_id}';
   `
   db.query(sql, (err) => {
-    if (err) {return callback(err); }
+    if (err) { return callback(err); }
   });
 }
 
@@ -29,13 +46,13 @@ function updateProdQuantity(product_id, quantity, callback) {
 // returns available quantity
 function getProdQuantity(product_id, callback) {
   let sql =
-  `
+    `
   SELECT quantity
   FROM product
   WHERE product_id = '${product_id}';
   `
   db.query(sql, (err) => {
-    if (err) {return callback(err, undefined);} //might not be handling all cases here
+    if (err) { return callback(err, undefined); } //might not be handling all cases here
     callback(null, result.rows.quantity);
   });
 }
@@ -47,13 +64,26 @@ function getProdQuantity(product_id, callback) {
 // also, no differentiation between image and thumbnail right now
 function addProduct(name, img, price, quantity, desc, callback) {
   let sql =
-  `
+    `
   INSERT INTO product (name, image, thumbnail, price, quantity, description)
   VALUES ('${name}', '${img}', '${img}', '${price}', '${quantity}', '${desc}');
   `
   db.query(sql, (err) => {
-    if (err) {return callback(err); }
+    if (err) { return callback(err); }
   });
+}
+
+function updateItemQuantity(item_id, quantity, callback) {
+  let sql =
+    `
+  UPDATE cart_item
+  SET quantity = '${quantity}'
+  WHERE item_id = '${item_id}';
+  `
+  db.query(sql, (err) => {
+    if (err) { return callback(err); }
+    callback(null);
+  })
 }
 
 // delete an item from cart_item based on item_id
@@ -61,7 +91,7 @@ function addProduct(name, img, price, quantity, desc, callback) {
 // returns: nothing
 function deleteItemByIID(item_id, callback) {
   let sql =
-  `
+    `
   DELETE FROM cart_item WHERE item_id = '${item_id}';
   `
   db.query(sql, (err) => {
@@ -75,11 +105,11 @@ function deleteItemByIID(item_id, callback) {
 // returns: nothing
 function deleteItemByPID(product_id, callback) {
   let sql =
-  `
+    `
   DELETE FROM cart_item WHERE product_id = '${product_id}';
   `
   db.query(sql, (err) => {
-    if (err) {return callback(err);}
+    if (err) { return callback(err); }
   });
 }
 
@@ -88,7 +118,7 @@ function deleteItemByPID(product_id, callback) {
 // returns: nothing
 function deleteItemByUIDPID(user_id, product_id, callback) {
   let sql =
-  `
+    `
   DELETE FROM cart_item
   WHERE product_id = '${product_id}'
     AND user_id = '${user_id}';
@@ -105,12 +135,12 @@ function deleteItemByUIDPID(user_id, product_id, callback) {
 // INSTEAD, USE FUNCTION IN deleteProduct.js
 function deleteProductByPID(product_id, callback) {
   let sql =
-  `
+    `
   DELETE FROM product WHERE product_id = '${product_id}';
   `
 
   db.query(sql, (err) => {
-    if (err) {return callback(err);}
+    if (err) { return callback(err); }
   });
 }
 
@@ -119,11 +149,11 @@ function deleteProductByPID(product_id, callback) {
 //returns: nothing
 function deleteProdcatByPID(product_id, callback) {
   let sql =
-  `
+    `
   DELETE FROM product_category WHERE product_id = '${product_id}';
   `
   db.query(sql, (err) => {
-    if (err) {return callback(err);}
+    if (err) { return callback(err); }
   });
 }
 
@@ -149,7 +179,7 @@ function createAccount(username, password, callback) {
     `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null); }
-    callback(null)
+    callback(null);
   });
 }
 
@@ -245,7 +275,7 @@ function insertToken(session_id, user_id, callback) {
     `
   db.query(sql, (err) => {
     if (err) { return callback(err, null); }
-    callback(null)
+    callback(null);
   });
 }
 
@@ -260,11 +290,11 @@ function uidFromSID(session_id, callback) {
   `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
-    if(result.rows[0] == undefined){
+    if (result.rows[0] == undefined) {
       return callback(null, false, null);
     }
 
-    if(result.rows[0].user_id == undefined){
+    if (result.rows[0].user_id == undefined) {
       return callback(null, false, null);
     }
     callback(null, true, result.rows[0].user_id); //err, exists, user_id
@@ -282,7 +312,7 @@ function usernameByUID(user_id, callback) {
   `
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null); }
-    if(result.rows[0].username == undefined){
+    if (result.rows[0].username == undefined) {
       return callback('username undefined', null);
     }
     callback(null, result.rows[0].username);
@@ -323,8 +353,8 @@ function productInfoFromPID(product_id, callback) {
 // returns: exists boolean, is_admin boolean
 // callback: err, exists, is_admin
 function adminFromUID(user_id, callback) {
-  let sql = 
-  `
+  let sql =
+    `
     SELECT is_admin
     FROM account
 
@@ -334,17 +364,17 @@ function adminFromUID(user_id, callback) {
   //not sure about this section, or quite what kind of error handling needs to be done here
   db.query(sql, (err, result) => {
     if (err) { return callback(err, null, null); }
-    if(result.rows[0].is_admin == undefined) {
+    if (result.rows[0].is_admin == undefined) {
       return callback(null, false, null);
     }
     callback(null, true, result.rows[0].is_admin);
   });
 }
 
-function addItemToCart(user_id, product_id, quantity, callback){
+function addItemToCart(user_id, product_id, quantity, callback) {
 
-  let sql = 
-  `
+  let sql =
+    `
   INSERT INTO cart_item (user_id, product_id, quantity)
   VALUES ('${user_id}', '${product_id}', ${quantity});
   `
@@ -362,6 +392,7 @@ function addItemToCart(user_id, product_id, quantity, callback){
 
 module.exports = {
   updateProdQuantity,
+  updateItemQuantity,
   getProdQuantity,
   addProduct,
   deleteItemByIID,
@@ -382,5 +413,6 @@ module.exports = {
   cartItemsbyUID,
   productInfoFromPID,
   adminFromUID,
-  addItemToCart
+  addItemToCart,
+  updateProd
 };
