@@ -161,7 +161,7 @@ function deleteProdcatByPID(product_id, callback) {
 }
 
 // grabs all products from the table
-function fetchProducts(callback) {
+function fetchAllProducts(callback) {
   let sql =
     `
     SELECT *
@@ -172,6 +172,20 @@ function fetchProducts(callback) {
     callback(null, result.rows);
   });
 }
+
+function fetchVisibleProducts(callback) {
+  let sql =
+  `
+  SELECT *
+  FROM product WHERE is_deleted = FALSE;
+  `
+db.query(sql, (err, result) => {
+  if (err) { return callback(err, null); }
+  callback(null, result.rows);
+});
+}
+
+
 //takes: username, password
 //returns: null (inserts account into table)
 function createAccount(username, password, callback) {
@@ -433,7 +447,8 @@ module.exports = {
   deleteItemByUIDPID,
   deleteProdcatByPID,
   deleteProductByPID,
-  fetchProducts,
+  fetchAllProducts,
+  fetchVisibleProducts,
   createAccount,
   accountTaken,
   loginValid,

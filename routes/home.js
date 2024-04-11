@@ -8,14 +8,12 @@ router.get('/', function (req, res, next) {
   const token = req.query.session || null;
   const message = req.query.message || null;
 
-  queries.fetchProducts((err, items) => {
-    if (err) {
-      return next(err);
+    if (token == null) {
+      queries.fetchVisibleProducts((err, items) => {
+        res.render('pages/home', { title: "Home!", items: items, token: null, admin: false, message: "" });
+      });
     }
 
-    if (token == null) {
-      res.render('pages/home', { title: "Home!", items: items, token: null, admin: false, message: "" });
-    }
     else {
       queries.uidFromSID(token, (err, exists, user_id) => {
         if (err) {
@@ -34,18 +32,29 @@ router.get('/', function (req, res, next) {
               res.send("invalid session token ):");
             }
             if (exists) {
+            
               if (is_admin == null || is_admin == undefined) {
                 return res.status(500).send('An error, your status is undefined');
               } else {
-                res.render('pages/home', { title: "Home!", items: items, token: token, admin: is_admin, message: message });
+                if (err) {
+                  return next(err);
+                } else {
+                  if(is_admin){
+                    queries.fetchAllProducts((err, items) => {
+                     res.render('pages/home', { title: "Home!", items: items, token: token, admin: true, message: message });
+                    });
+                  } else {
+                    queries.fetchVisibleProducts((err, items) => {
+                      res.render('pages/home', { title: "Home!", items: items, token: token, admin: false, message: message });
+                    });
+                  }
+                }
               }
             }
           });
         }
       });
     }
-  });
-
 });
 
 // Error-handling middleware
