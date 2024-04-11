@@ -10,8 +10,9 @@
 </head>
 <body>
   <h1><%= title %></h1>
-
+  
   <% if (items && items.length > 0) { %>
+    <!-- <% items.sort() %> -->
     <div class="product-grid">
       <% items.forEach(function(item) { %>
         <a href="/<% if (admin) { %>edit<% } else { %>view<% } %>-product/<%= item.product_id %><%= token ? '?session=' + token : '' %>" class="product-link">
