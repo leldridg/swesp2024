@@ -53,6 +53,7 @@ router.post('/', function (req, res, next) {
                   if(err){
                     return next(err);
                   }
+                  else {
                   if(!exists){
                     res.send("invalid session token ):");
                   } else {
@@ -62,9 +63,9 @@ router.post('/', function (req, res, next) {
                     }
                   })
                 }
+              }
               });
             });
-
             res.redirect(`/?session=${token}`);
           }
         } else {
