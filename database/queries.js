@@ -408,10 +408,11 @@ function addItemToCart(user_id, product_id, quantity, callback) {
 function addChangeLog(type, product_id, user_id, callback){
 
   let sql =
-    `
-    INSERT INTO change_log (timestamp, type, product_id, user_id)
-    VALUES (NOW(), '${type}', '${product_id}', '${user_id}');
-    `
+  `
+  INSERT INTO change_log (timestamp, type, product_id, user_id)
+  VALUES (CURRENT_TIMESTAMP, '${type}', '${product_id}', '${user_id}');
+  `
+  
 
   db.query(sql, (err, result) => {
     if(err)  { return(callback(err)); }

@@ -5,7 +5,7 @@
     Home Page
   </title>
   <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/home.css' />
   <%- include('../partials/head.ejs', {token: token, admin:admin}) %>
 </head>
 <body>
@@ -40,7 +40,11 @@
     </script>
     <% } %>
 
-  <img src="/images/cow.gif">
+  <div class="site-label">
+    <p> An Authentic Pet Store Website </p>
+
+    <img src="/images/cow.gif">
+  </div>
 
 </body>
 </html>

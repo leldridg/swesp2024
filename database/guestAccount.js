@@ -25,6 +25,7 @@ function guestAccount(productId, quantity, callback) {
     if (err) { return callback(err, null); }
     if (taken) {
       console.log('non unique username');
+      return callback('non unique username', null);
     } else {
       queries.createAccount(username, password, (err, success) => {
         if (err) { return callback(err, null); }

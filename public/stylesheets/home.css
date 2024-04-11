@@ -69,3 +69,11 @@ h1 {
     grid-template-columns: 1fr; /* One column for mobile screens */
   }
 }
+
+
+.site-label {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  max-width: 100%;
+  height: auto;
+}
