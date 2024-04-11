@@ -8,7 +8,7 @@ body, html {
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     padding: 10px 20px;
     width: 100%;
     box-sizing: border-box;
@@ -19,59 +19,53 @@ body, html {
     z-index: 1000;
 }
 
-.logo {
-    display: flex;
-    align-items: center; 
-    height: 125px;
-    width: 100%;
-    justify-content: flex-start;
-}
-
-.logo img {
-    max-height: 100%;
+.logo a.logo-link img {
+    max-height: 100px;
     width: auto;
     object-fit: contain;
 }
 
-.user-navigation {
+.action-items, .admin-content {
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
     align-items: center;
-    padding-top: 10px;
 }
 
-.user-navigation .cart img{
+.logout-link, .admin-content a {
+    color: black;
+    padding: 8px 16px;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.action-items .cart img {
     height: 30px;
+    margin-left: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
 .dropbtn {
     background-color: #ffffff;
     color: black;
-    padding: 16px;
+    padding: 8px 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-    white-space: nowrap;
-}
-
-.dropdown {
-    position: relative;
-    margin-left: 20px;
-}
-
-.action-items {
-    display: flex;
-    align-items: center;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    right: 0;
     background-color: #f9f9f9;
+    right: 0;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
 }
 

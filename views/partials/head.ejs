@@ -8,48 +8,45 @@
 
 <body>
 	<header class="site-header">
+		<!-- Displays the logo -->
 		<div class="logo">
 			<nav class="a">
-				<a href="/<%= token ? '?session=' + token : '' %>" class="logo">
-					<img src="../images/logo.png" alt="Logo" class="top-left-image">
+				<a href="/<%= token ? '?session=' + token : '' %>" class="logo-link">
+					<img src="../images/logo.png" alt="Logo">
 				</a>
 			</nav>
 		</div>
+		
+		<!-- Displays the add product button if logged in as admin -->
 		<% if (admin) { %>
-			<div class="logo">
-				<nav class="a">
-					<a href="/add-product<%= token ? '?session=' + token : '' %>" class="logo">
-						<img src="../images/logo.png" alt="Logo" class="top-left-image">
-					</a>
-				</nav>
+			<nav class="admin-content">
+				<a href="/add-product<%= token ? '?session=' + token : '' %>" >Add Product</a>
 			</div>
 		<% } %>
 		
-
-		<% if (token == "" || token == undefined || token == null) { %>
+		<!-- Displays the logout button if token exists -->
+		<% if (token) { %>
 			<div class="action-items">
-			<div class="dropdown">
-				<button class="dropbtn">Sign In</button>
-				<div class="dropdown-content">
-					<a href="/create-account">Create Account</a>
-					<a href="/login">Log In</a>
-				</div>
+				<a href="/" class="logout-link">Log Out</a>
+				<!-- Displays the cart button if not an admin -->
+				<% if (!admin) { %>
+					<a href="/cart<%= token ? '?session=' + token : '' %>" class="cart">
+						<img src="../images/shopping-cart.png" alt="Cart">
+					</a>
+				<% } %>
 			</div>
+		<!-- Displays the sign in dropdown if token doesn't exist -->
 		<% } else { %>
 			<div class="action-items">
-			<a href="/">Log Out</a>
+				<div class="dropdown">
+					<button class="dropbtn">Sign In</button>
+					<div class="dropdown-content">
+						<a href="/create-account">Create Account</a>
+						<a href="/login">Log In</a>
+					</div>
+				</div>
 			</div>
 		<% } %>
-
-
-			<% if (!admin) { %>
-		
-			<nav class="user-navigation">
-				<a href="/cart<%= token ? '?session=' + token : '' %>" class="cart">
-					<img src="../images/shopping-cart.png" alt="">
-				</a>
-			</nav>
-			<% } %>
 	</header>
 </body>
 </html>
