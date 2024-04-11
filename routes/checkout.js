@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
 
     const token = req.query.session || null;
 
-    if(token == null || token == undefined || token == ""){
+    if (token == null || token == undefined || token == "") {
       res.send("invalid session token ):");
     }
     func.isTokenAdmin(token, (err, exists, is_admin) => {
@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
       if (exists && is_admin) {
         res.redirect(`/?session=${token}`);
       } else {
-        res.render('pages/checkout', {admin: false, token: token});
+        res.render('pages/checkout', { admin: false, token: token });
       }
     });
   } else {

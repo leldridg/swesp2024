@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
-    <%- include('../partials/head.ejs', {token: token, admin:false}) %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="/stylesheets/shoppingCart.css">
+  <%- include('../partials/head.ejs', {token: token, admin:false}) %>
 </head>
 
-<% total = 0 %>
-
-
-    <% if (items && items.length > 0) { %>
-    <% items.forEach(function(item) {%>
-        <%  total += item.price * item.quantity;%>
-    <%  });%>
-    <% } %>
-
+<% total=0 %>
+<% if (items && items.length> 0) { %>
+  <% items.forEach(function(item) {%>
+    <% total +=item.price * item.quantity;%>
+  <% });%>
+<% } %>
 
 <body>
     <div class="shopping-cart-container">
@@ -59,13 +57,15 @@
             <% } else { %>
                 <p>No items to display.</p>
             <% } %>
-        </div>
+  </div>
 
-        <div class="order-summary">
-            <h2>Order Summary:</h2>
-            <p>Subtotal: $<%= total.toFixed(2) %></p>
-            <button class="checkout-btn">Proceed to Checkout:</button>
-        </div>
-    </div>
+  <div class="order-summary">
+    <h2>Order Summary:</h2>
+    <p>Subtotal: $<%= total.toFixed(2) %>
+    </p>
+    <button class="checkout-btn">Proceed to Checkout:</button>
+  </div>
+</div>
 </body>
+
 </html>
