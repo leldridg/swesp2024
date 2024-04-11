@@ -20,6 +20,7 @@ function checkout(user_id, callback) {
             });
         })
     })
+    callback(null);
 }
 
 module.exports = { checkout }

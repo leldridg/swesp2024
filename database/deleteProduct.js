@@ -16,6 +16,7 @@ function deleteProduct(product_id, callback) {
     queries.deleteProductByPID(product_id, (err) => {
         if (err) { return callback(err); }
     });
+    callback(null);
 }
 
 module.exports = { deleteProduct }

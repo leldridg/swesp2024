@@ -23,7 +23,7 @@ function generateToken(username, callback) {
       if (valid) {
 
         queries.insertToken(sess, user_id, (err) => {
-          if (err) { console.log(err); }
+          if (err) { return callback(err,null); }
         });
         callback(null, sess);
       } else {
