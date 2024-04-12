@@ -5,13 +5,14 @@
     Home Page
   </title>
   <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/home.css' />
   <%- include('../partials/head.ejs', {token: token, admin:admin}) %>
 </head>
 <body>
   <h1><%= title %></h1>
-
+  
   <% if (items && items.length > 0) { %>
+    <!-- <% items.sort() %> -->
     <div class="product-grid">
       <% items.forEach(function(item) { %>
         <a href="/<% if (admin) { %>edit<% } else { %>view<% } %>-product/<%= item.product_id %><%= token ? '?session=' + token : '' %>" class="product-link">
@@ -39,7 +40,11 @@
     </script>
     <% } %>
 
-  <img src="/images/cow.gif">
+  <div class="site-label">
+    <p> An Authentic Pet Store Website </p>
+
+    <img src="/images/cow.gif">
+  </div>
 
 </body>
 </html>

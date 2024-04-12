@@ -65,11 +65,14 @@ function getProdQuantity(product_id, callback) {
 function addProduct(name, img, price, quantity, desc, callback) {
   let sql =
     `
-  INSERT INTO product (name, image, thumbnail, price, quantity, description)
-  VALUES ('${name}', '${img}', '${img}', '${price}', '${quantity}', '${desc}');
+  INSERT INTO product (name, image, is_deleted, thumbnail, price, quantity, description)
+  VALUES ('${name}', '${img}', 'false','${img}', '${price}', '${quantity}', '${desc}')
+  RETURNING product_id
   `
-  db.query(sql, (err) => {
-    if (err) { return callback(err); }
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err, null); }
+    if(result.rows.length == 0){ return callback("no product id returned", null);}
+    return callback(null, result.rows[0].product_id);
   });
 }
 
@@ -150,8 +153,11 @@ function deleteItemByUIDPID(user_id, product_id, callback) {
 // INSTEAD, USE FUNCTION IN deleteProduct.js
 function deleteProductByPID(product_id, callback) {
   let sql =
-    `
-  DELETE FROM product WHERE product_id = '${product_id}';
+  //DELETE FROM product WHERE product_id = '${product_id}';
+  `
+  UPDATE product
+  SET is_deleted = true
+  WHERE product_id = '${product_id}';
   `
 
   db.query(sql, (err) => {
@@ -173,7 +179,7 @@ function deleteProdcatByPID(product_id, callback) {
 }
 
 // grabs all products from the table
-function fetchProducts(callback) {
+function fetchAllProducts(callback) {
   let sql =
     `
     SELECT *
@@ -184,6 +190,20 @@ function fetchProducts(callback) {
     callback(null, result.rows);
   });
 }
+
+function fetchVisibleProducts(callback) {
+  let sql =
+  `
+  SELECT *
+  FROM product WHERE is_deleted = FALSE;
+  `
+db.query(sql, (err, result) => {
+  if (err) { return callback(err, null); }
+  callback(null, result.rows);
+});
+}
+
+
 //takes: username, password
 //returns: null (inserts account into table)
 function createAccount(username, password, callback) {
@@ -403,7 +423,38 @@ function addItemToCart(user_id, product_id, quantity, callback) {
   });
 }
 
+function addChangeLog(type, product_id, user_id, callback){
 
+  let sql =
+  `
+  INSERT INTO change_log (timestamp, type, product_id, user_id)
+  VALUES (CURRENT_TIMESTAMP, '${type}', '${product_id}', '${user_id}');
+  `
+  
+
+  db.query(sql, (err, result) => {
+    if(err)  { return(callback(err)); }
+    else {
+      callback(null);
+    }
+  });
+}
+
+function viewChangeLog(product_id, callback){
+  let sql =
+  `
+  SELECT change_id, timestamp, type, product_id, user_id
+  FROM change_log
+
+  WHERE product_id = '${product_id}';
+`
+  db.query(sql, (err, result) => {
+    if(err)  { return(callback(err, null)); }
+    else {
+      callback(null, result.rows);
+    }
+  });
+}
 
 module.exports = {
   updateProdQuantity,
@@ -416,7 +467,8 @@ module.exports = {
   deleteItemByUIDPID,
   deleteProdcatByPID,
   deleteProductByPID,
-  fetchProducts,
+  fetchAllProducts,
+  fetchVisibleProducts,
   createAccount,
   accountTaken,
   loginValid,
@@ -430,5 +482,7 @@ module.exports = {
   productInfoFromPID,
   adminFromUID,
   addItemToCart,
-  updateProd
+  updateProd,
+  addChangeLog,
+  viewChangeLog
 };

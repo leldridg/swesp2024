@@ -35,6 +35,6 @@ app.use("/edit-product", editProduct);
 app.use("/cart", shoppingCart);
 
 app.listen(port, function () {
-  console.log(`SWE SP 2024 app listening on port  ${port}!`);
+  console.log(`SWE SP 2024 app listening on port ${port}!`);
 });
 

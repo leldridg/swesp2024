@@ -73,3 +73,23 @@ h1 {
   line-height: 1.6;
 }
 
+/* styles.css */
+.centered-text {
+  text-align: center;
+}
+.bubble {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  border: 2px solid #4CAF50; /* Example blue border */
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px; /* Space between the border and content */
+  margin: 10px auto; /* Top and bottom margins, auto on the sides to center the bubble */
+  background-color: #E9ECEF; /* Light gray background */
+  width: 300px; /* Fixed width */
+}
+/* Style for paragraphs inside each bubble to reduce vertical spacing */
+.bubble p {
+  margin: 4px 0; /* Reduced top and bottom margin */
+}
