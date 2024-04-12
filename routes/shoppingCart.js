@@ -12,8 +12,8 @@ router.get('/', function (req, res, next) {
 
   token = req.query.session || null;
 
-  if (Object.keys(req.query).length === 0) {
-    res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null });
+  if(Object.keys(req.query).length === 0){
+    res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null, user_id: null});
   } else {
     queries.uidFromSID(req.query.session, (err, exists, user_id) => {
       if (err) { return next(err); }
@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
                 if (is_admin) {
                   res.redirect(`/?session=${token}`);
                 } else {
-                  res.render('pages/cart', { title: username, items: items, token: req.query.session });
+                  res.render('pages/cart', { title: username, items: items, token:req.query.session, user_id: user_id});
                 }
               } else {
                 res.redirect(`/?session=${token}`);
@@ -42,6 +42,23 @@ router.get('/', function (req, res, next) {
       }
     });
   }
+});
+
+router.post('/delete-item', function (req, res) {
+  const { uid, pid, token } = req.body; //get user_id, product_id, and token from form
+
+  queries.deleteItemByUIDPID(uid, pid, (err) => {
+    res.redirect(`/cart/?session=${token}`);
+  });
+
+});
+
+router.post('/update-quantity', function(req, res) {
+  const { quantity, uid, pid, token } = req.body; //get info from form
+
+  queries.updateItemQuantityByUIDPID(uid, pid, quantity, (err) => {
+    res.redirect(`/cart/?session=${token}`);
+  });
 });
 
 // Error-handling middleware

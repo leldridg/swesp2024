@@ -17,38 +17,44 @@
 <% } %>
 
 <body>
-  <div class="shopping-cart-container">
-    <div class="cart-items">
-      <h1>
-        <%= title.includes('guest') ? 'Guest' : title %>'s Shopping Cart
-      </h1>
-      <% if (items && items.length> 0) { %>
-        <!-- <% items.sort() %> -->
-
-        <% items.forEach(function(item) { %>
-        <div class="cart-item">
-          <% if (item.image) { %>
-          <img src=<%=item.image %> alt="Image" class="item-image">
-          <% } else { %>
-            <img src="/images/logo.png" alt="Image" class="item-image">
-          <% } %>
-
-      <div class="item-details">
-        <p class="item-title">
-          <%= item.name %>
-        </p>
-        <p class="item-price">$<%= item.price.toFixed(2) %>
-        </p>
-        <div class="item-quantity">
-          <label for="quantity">Qty:</label>
-          <input id="quantity" type="number" value=<%=item.quantity %> />
-          <img src="/images/bin.png" alt="Remove item" class="remove-item">
-        </div>
-      </div>
-      </div>
-        <% }); %>
-          <% } else { %>
-            <p>No items to display.</p>
+    <div class="shopping-cart-container">
+        <div class="cart-items">
+            <h1><%= title.includes('guest') ? 'Guest' : title %>'s Shopping Cart</h1>
+            <% if (items && items.length > 0) { %>
+                <% items.sort((a, b) => a.name.localeCompare(b.name)); %>
+                <% items.forEach(function(item) { %>
+                    <div class="cart-item">
+                        <% if (item.image) { %>
+                            <img src=<%= item.image %> alt="Image" class="item-image">
+                        <% } else { %>
+                            <img src="/images/logo.png" alt="Image" class="item-image">
+                        <% } %>
+                        <div class="item-details">
+                            <p class="item-title"><%= item.name %></p>
+                            <p class="item-price">$<%= item.price.toFixed(2) %></p>
+                            <div class="item-quantity">
+                                <label for="quantity">Qty:</label>
+                                <!--<input id="quantity" type="number" value=<%= item.quantity %> />-->
+                                <form class="update-quantity" action="/cart/update-quantity" method="post">
+                                    <input id="quantity" type="number" name="quantity" value=<%= item.quantity %> onchange="this.form.submit()" />
+                                    <input type="hidden" name="token" value=<%=token %>>
+                                    <input type="hidden" name="uid" value=<%=user_id %>>
+                                    <input type="hidden" name="pid" value=<%=item.product_id %>>
+                                </form>
+                                <form class="delete-item" action="/cart/delete-item" method="post">
+                                    <input type="hidden" name="token" value=<%=token %>>
+                                    <input type="hidden" name="uid" value=<%=user_id %>>
+                                    <input type="hidden" name="pid" value=<%=item.product_id %>>
+                                    <button class="remove-item-btn" type="submit">
+                                        <img src="/images/bin.png" alt="Remove item" class="remove-item-icon">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No items to display.</p>
             <% } %>
   </div>
 

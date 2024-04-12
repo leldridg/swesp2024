@@ -76,7 +76,7 @@ function addProduct(name, img, price, quantity, desc, callback) {
   });
 }
 
-function updateItemQuantity(item_id, quantity, callback) {
+function updateItemQuantityByIID(item_id, quantity, callback) {
   let sql =
     `
   UPDATE cart_item
@@ -85,6 +85,20 @@ function updateItemQuantity(item_id, quantity, callback) {
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }
+    callback(null);
+  })
+}
+
+function updateItemQuantityByUIDPID(user_id, product_id, quantity, callback) {
+  let sql =
+  `
+  UPDATE cart_item
+  SET quantity = '${quantity}'
+  WHERE user_id = '${user_id}' AND product_id = '${product_id}';
+  `
+
+  db.query(sql, (err) => {
+    if (err) {return callback(err); }
     callback(null);
   })
 }
@@ -129,6 +143,7 @@ function deleteItemByUIDPID(user_id, product_id, callback) {
   db.query(sql, (err) => {
     if (err) { return callback(err); }
   });
+  callback(null);
 }
 
 // delete a product from product table pased on product_id
@@ -358,7 +373,7 @@ function cartItemsbyUID(user_id, callback) {
 // returns: product info
 function productInfoFromPID(product_id, callback) {
   let sql = `
-    SELECT name, price, description, quantity, image
+    SELECT name, price, description, quantity, image, product_id
     FROM product
 
     WHERE product_id = '${product_id}';
@@ -443,7 +458,8 @@ function viewChangeLog(product_id, callback){
 
 module.exports = {
   updateProdQuantity,
-  updateItemQuantity,
+  updateItemQuantityByIID,
+  updateItemQuantityByUIDPID,
   getProdQuantity,
   addProduct,
   deleteItemByIID,

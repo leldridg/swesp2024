@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <script src="/scripts/createAccount.js" defer></script>
-  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/createAccount.css' />
   <title>Create Account</title>
   <%- include('../partials/head.ejs', {token: null, admin:false}) %>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector('.create-account-form');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm-password');
+    const errorMessage = document.querySelector('.error-message');
+
+    form.addEventListener('submit', function (e) {
+      if (password.value !== confirmPassword.value) {
+        e.preventDefault(); // Stop form submission
+        password.classList.add('error');
+        confirmPassword.classList.add('error');
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = 'Passwords do not match!';
+      } else {
+        password.classList.remove('error');
+        confirmPassword.classList.remove('error');
+        errorMessage.style.display = 'none';
+      }
+    });
+  });
+  </script>
 </head>
 
-<% if (taken) { %>
-  <div>
-    <p> this username is already taken </p>
-  </div>
-
-<% } %>
-
 <body>
+  <% if (taken) { %>
+    <div class="error-message">
+      <p> This username is already taken </p>
+    </div>
+  <% } %>
   <div class="login-container">
     <form class="create-account-form" action="/create-account" method="post">
       <div class="input-group">
-        <label for="username">username:</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
       </div>
       <div class="input-group">
-        <label for="password">password:</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" value="<%= taken ? password : '' %>" required>
       </div>
       <div class="input-group">
-          <label for="confirm-password">confirm password:</label>
-          <input type="password" id="confirm-password" name="confirm-password" value="<%= taken ? password : '' %>" required>
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" value="<%= taken ? password : '' %>" required>
       </div>
+      <div class="error-message"></div>
       <button type="submit" class="login-button">Create Account!</button>
       <div class="signup-link">
-        <p>have an account? <a href="/login" class="login-link">Login</a></p>
+        <p>Have an account? <a href="/login" class="login-link">Login</a></p>
       </div>
     </form>
   </div>
 </body>
-
 </html>
