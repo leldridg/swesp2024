@@ -138,8 +138,11 @@ function deleteItemByUIDPID(user_id, product_id, callback) {
 // INSTEAD, USE FUNCTION IN deleteProduct.js
 function deleteProductByPID(product_id, callback) {
   let sql =
-    `
-  DELETE FROM product WHERE product_id = '${product_id}';
+  //DELETE FROM product WHERE product_id = '${product_id}';
+  `
+  UPDATE product
+  SET is_deleted = true
+  WHERE product_id = '${product_id}';
   `
 
   db.query(sql, (err) => {

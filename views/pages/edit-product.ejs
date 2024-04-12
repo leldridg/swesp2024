@@ -8,7 +8,8 @@
   <%- include('../partials/head.ejs', {token: token, admin : admin}) %>
 </head>
 <body>
-  <form id="edit-product-form" class="edit-product-container" action="/edit-product/<%= productId %>" method="post">
+  <div class="edit-product-container">
+  <form id="edit-product-form" action="/edit-product/<%= productId %>" method="post">
     <div class="product-image">
       <label for="product-image-url">Product Image URL:</label>
       <input type="text" id="product-image-url" name="image" value="<%= item.image %>">
@@ -35,9 +36,14 @@
 
     <div class="product-actions">
       <input type="submit" class="btn save-changes" value="Save Changes">
-      <button type="button" class="btn delete-product">Delete Product</button>
     </div>
   </form>
+  <form id="delete-product-form" action="/edit-product/<%= productId %>/delete" method="post">
+    <input type="hidden" name="productId" value= <%= productId %>>
+    <input type="hidden" name="token" value= <%= token %>>
+    <input type="submit" class="btn delete-product" value="Delete Product">
+  </form>
+  </div>
   <% if (change_log && change_log.length > 0) { %>
     <% change_log.forEach(function(change) { %>
       <div class="bubble centered-text">
