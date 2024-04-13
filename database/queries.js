@@ -46,14 +46,20 @@ function updateProdQuantity(product_id, quantity, callback) {
 // returns available quantity
 function getProdQuantity(product_id, callback) {
   let sql =
-    `
+  `
   SELECT quantity
   FROM product
   WHERE product_id = '${product_id}';
   `
-  db.query(sql, (err) => {
-    if (err) { return callback(err, undefined); } //might not be handling all cases here
-    callback(null, result.rows.quantity);
+  db.query(sql, (err, result) => {   
+    if (err) { return callback(err, null); } //might not be handling all cases here
+    else {
+      if (result.rows.length === 0) {
+          return callback(new Error("product not found"), null); // Handle the case where product is not found
+      }
+      const quantity = result.rows[0].quantity; // Access the quantity from the result
+      callback(null, quantity); // Pass the quantity to the callback
+    }
   });
 }
 
