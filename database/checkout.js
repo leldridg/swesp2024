@@ -4,9 +4,10 @@ function checkout(user_id, callback) {
     // get items in cart
     queries.cartItemsbyUID(user_id, (err, cartItems) => {
         if (err) { return callback(err); }
-        cartItems.foreach(item => {
+        cartItems.forEach(item => {
             //get available quantity of product
-            queries.getProdQuantity(user_id, (err, quantity) => {
+            //console.log(item.product_id);
+            queries.getProdQuantity(item.product_id, (err, quantity) => {
                 if (err) { return callback(err); }
                 //update available quantity of product based on quantity in cart
                 queries.updateProdQuantity(item.product_id, quantity - item.quantity, (err) => {

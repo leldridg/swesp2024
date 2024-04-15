@@ -62,7 +62,12 @@
     <h2>Order Summary:</h2>
     <p>Subtotal: $<%= total.toFixed(2) %>
     </p>
-    <button class="checkout-btn">Proceed to Checkout:</button>
+    <form action="/cart/nav" method="post">
+        <input type="hidden" name="token" value=<%=token %>>
+        <input type="hidden" name="quantity" value=<%=items.length %>>
+        <button class="checkout-btn" type="submit">Proceed to Checkout:</button>
+    </form>
+    
   </div>
 </div>
 </body>

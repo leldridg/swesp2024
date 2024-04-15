@@ -61,6 +61,16 @@ router.post('/update-quantity', function(req, res) {
   });
 });
 
+router.post('/nav', function(req, res) {
+  const { quantity, token } = req.body;
+
+  if (quantity > 0) {
+    res.redirect(`/checkout/?session=${token}`);
+  } else {
+    res.status(400).send("Put an item in your cart first!");
+  }
+});
+
 // Error-handling middleware
 router.use((err, req, res, next) => {
   console.error(err); // Log the error information for debugging purposes
