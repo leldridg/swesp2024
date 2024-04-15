@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
     if (token == null) {
       queries.fetchVisibleProducts((err, items) => {
-        res.render('pages/home', { title: "Home!", items: items, token: null, admin: false, message: "" });
+        res.render('pages/home', { title: "Home!", items: items, token: null, admin: false, message: "", adminItems: null});
       });
     }
 
@@ -39,22 +39,30 @@ router.get('/', function (req, res, next) {
                 if (err) {
                   return next(err);
                 } else {
-                  if(is_admin){
-                    queries.fetchAllProducts((err, items) => {
-                     res.render('pages/home', { title: "Home!", items: items, token: token, admin: true, message: message });
-                    });
-                  } else {
                     queries.fetchVisibleProducts((err, items) => {
-                      res.render('pages/home', { title: "Home!", items: items, token: token, admin: false, message: message });
+                      if(err){
+                        return next(err);
+                      }
+                      else {
+                        if(is_admin){
+                          queries.fetchAdminProducts((err, adminItems) => {
+                            if(err){
+                              return next(err);
+                            }
+                            res.render('pages/home', { title: "Home!", items: items, token: token, admin: true, message: message, adminItems: adminItems});
+                          });
+                        } else {
+                          res.render('pages/home', { title: "Home!", items: items, token: token, admin: false, message: message, adminItems: null});
+                        }
+                    }
                     });
                   }
                 }
               }
-            }
-          });
-        }
-      });
-    }
+            })
+          }
+        })
+      };
 });
 
 // Error-handling middleware
