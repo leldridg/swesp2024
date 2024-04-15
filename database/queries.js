@@ -209,6 +209,18 @@ db.query(sql, (err, result) => {
 });
 }
 
+function fetchAdminProducts(callback) {
+  let sql =
+  `
+  SELECT *
+  FROM product WHERE is_deleted = TRUE;
+  `
+  db.query(sql, (err, result) => {
+    if (err) { return callback(err, null); }
+    callback(null, result.rows);
+  });
+}
+
 
 //takes: username, password
 //returns: null (inserts account into table)
@@ -490,5 +502,6 @@ module.exports = {
   addItemToCart,
   updateProd,
   addChangeLog,
-  viewChangeLog
+  viewChangeLog,
+  fetchAdminProducts
 };

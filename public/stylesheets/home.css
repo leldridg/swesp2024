@@ -77,3 +77,10 @@ h1 {
   max-width: 100%;
   height: auto;
 }
+
+.deletion {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  max-width: 100%;
+  height: auto;
+}
