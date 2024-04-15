@@ -41,7 +41,7 @@
   <form id="delete-product-form" action="/edit-product/<%= productId %>/delete" method="post">
     <input type="hidden" name="productId" value= <%= productId %>>
     <input type="hidden" name="token" value= <%= token %>>
-    <input type="submit" class="btn delete-product" value="Delete Product">
+    <input type="submit" class="btn delete-product" value="Delete Product" onclick="confirmDeletion(event)">
   </form>
   </div>
   <% if (change_log && change_log.length > 0) { %>
@@ -56,6 +56,14 @@
     <% }) %>
   <% } %>
   
+  <script>
+    function confirmDeletion(event) {
+      if (!confirm("Are you sure you want to delete this product?")) {
+        event.preventDefault(); // Prevent form submission if the user clicks 'Cancel'
+      }
+    }
+    </script>
+    
   
 </body>
 </html>
