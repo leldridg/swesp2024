@@ -32,9 +32,10 @@
 
 <body>
   <% if (taken) { %>
-    <div class="error-message">
+    <div class="username-message">
       <p> This username is already taken </p>
     </div>
+    <% console.log("this code ran!") %>
   <% } %>
   <div class="login-container">
     <form class="create-account-form" action="/create-account" method="post">

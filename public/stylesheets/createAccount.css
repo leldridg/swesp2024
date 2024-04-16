@@ -77,3 +77,11 @@ body, html {
   margin: 10px 0;
   display: none; /* Hidden by default */
 }
+
+.username-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
