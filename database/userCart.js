@@ -31,7 +31,11 @@ function getUserCart(user_id, callback) {
         if (!item.quantity) {
           value.quantity = 1;
         } else {
-          value.quantity = item.quantity;
+          if(item.quantity >= 1){
+            value.quantity = item.quantity;
+          } else{
+            value.quantity = 1;
+          }
         }
 
         items[index] = value; // Use index to maintain order

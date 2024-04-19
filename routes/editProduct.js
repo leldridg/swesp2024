@@ -61,6 +61,8 @@ router.post('/:id', (req, res, next) => {
       res.send("non admin token ):");
       // res.redirect(`/view-product/${productId}?session=${token}`);
     } else {
+      if(quantity < 0) { return res.status(400).send("Quantity should not be negative"); }
+
       queries.updateProd(name, price, description, image, quantity, productId, (err, result) => {
       if (err) {
         return next(err);
