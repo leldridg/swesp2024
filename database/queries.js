@@ -106,7 +106,7 @@ function updateItemQuantityByUIDPID(user_id, product_id, quantity, callback) {
   db.query(sql, (err) => {
     if (err) {return callback(err); }
     callback(null);
-  })
+  });
 }
 
 // delete an item from cart_item based on item_id
