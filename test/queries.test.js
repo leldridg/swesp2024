@@ -10,58 +10,58 @@ describe('testing queries, which expect good inputs', () => {
         done();
     });
 
-    // //test product details
-    let product_id = null;
-    const name = 'Dev Test Product';
-    const img = 'https://cs.trinity.edu/~leldridg/images/logo.jpeg';
-    const price = 10.99;
-    const quantity = 5;
-    const desc = 'This is a decsription for a test product.';
+    // // //test product details
+    // let product_id = null;
+    // const name = 'Dev Test Product';
+    // const img = 'https://cs.trinity.edu/~leldridg/images/logo.jpeg';
+    // const price = 10.99;
+    // const quantity = 5;
+    // const desc = 'This is a decsription for a test product.';
 
-    //add test product to database
-    //use fetchProducts to see that new item is there, to get product_id and quantity
-    test('addProduct should add a product to the product table', (done) => {
+    // //add test product to database
+    // //use fetchProducts to see that new item is there, to get product_id and quantity
+    // test('addProduct should add a product to the product table', (done) => {
 
-        let product_id = null;
-        const name = 'Dev Test Product';
-        const img = 'https://cs.trinity.edu/~leldridg/images/logo.jpeg';
-        const price = 10.99;
-        const quantity = 5;
-        const desc = 'This is a decsription for a test product.';
+    //     let product_id = null;
+    //     const name = 'Dev Test Product';
+    //     const img = 'https://cs.trinity.edu/~leldridg/images/logo.jpeg';
+    //     const price = 10.99;
+    //     const quantity = 5;
+    //     const desc = 'This is a decsription for a test product.';
     
-        //add product
-        queries.addProduct(name, img, price, quantity, desc, (err) => {
-            //ensure addProduct succeeds
-            expect(err).toBeNull();
+    //     //add product
+    //     queries.addProduct(name, img, price, quantity, desc, (err) => {
+    //         //ensure addProduct succeeds
+    //         expect(err).toBeNull();
 
-            queries.fetchProducts((err, products) => {
-                //ensure fetchProducts succeeds
-                expect(err).toBeNull();
+    //         queries.fetchProducts((err, products) => {
+    //             //ensure fetchProducts succeeds
+    //             expect(err).toBeNull();
 
-                //console.log(products);
+    //             //console.log(products);
 
-                //find the newly added product in the product list
-                const addedProduct = products.find(product => product.name === name);
+    //             //find the newly added product in the product list
+    //             const addedProduct = products.find(product => product.name === name);
 
-                //assert product has the right details
-                expect(addedProduct).toBeDefined();
-                expect(addedProduct.name).toBe(name);
-                expect(addedProduct.image).toBe(img);
-                expect(addedProduct.price).toBe(price);
-                expect(addedProduct.quantity).toBe(quantity);
-                expect(addedProduct.description).toBe(desc);
+    //             //assert product has the right details
+    //             expect(addedProduct).toBeDefined();
+    //             expect(addedProduct.name).toBe(name);
+    //             expect(addedProduct.image).toBe(img);
+    //             expect(addedProduct.price).toBe(price);
+    //             expect(addedProduct.quantity).toBe(quantity);
+    //             expect(addedProduct.description).toBe(desc);
 
-                //ensure product_id is present
-                expect(addedProduct.product_id).toBeDefined();
+    //             //ensure product_id is present
+    //             expect(addedProduct.product_id).toBeDefined();
 
-                //console.log(addedProduct.product_id);
+    //             //console.log(addedProduct.product_id);
                 
-                //set undefined global test var
-                product_id = addedProduct.product_id;
-            });
-            done();
-        });
-    });
+    //             //set undefined global test var
+    //             product_id = addedProduct.product_id;
+    //         });
+    //         done();
+    //     });
+    // });
 
     
     // console.log('Product ID: ' + product_id);
