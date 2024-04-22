@@ -117,17 +117,31 @@ describe('test that visiting each page without a token is handled gracefully', (
 });
 
 //test that handling each page with an admin token is handled gracefully
-//NOTE: tests assume there is admin user with user_id 1
 
 describe('test that visiting each page with an admin token is handled gracefully', () => {
 
     test('check server response code for home page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
+
+        
 
         // let session_id = '';
 
@@ -147,13 +161,28 @@ describe('test that visiting each page with an admin token is handled gracefully
             throw error;
         }
 
+        //await db.query("ROLLBACK;");
+
     });
 
     test('check server response code for create account page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -173,13 +202,27 @@ describe('test that visiting each page with an admin token is handled gracefully
             console.error('Error:', error.message);
             throw error;
         }
+        //await db.query("ROLLBACK;");
     });
 
     test('check server response code for login page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -199,13 +242,27 @@ describe('test that visiting each page with an admin token is handled gracefully
             console.error('Error:', error.message);
             throw error;
         }
+        //await db.query("ROLLBACK;");
     });
 
     test('check server response code for cart page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -229,12 +286,24 @@ describe('test that visiting each page with an admin token is handled gracefully
 
     test('check server response code for view product page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
-
         // let session_id = '';
 
         // generator.generateToken('admin', (err, token) => {
@@ -255,12 +324,24 @@ describe('test that visiting each page with an admin token is handled gracefully
 
     test('check server response code for checkout page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
-
         // let session_id = '';
 
         // generator.generateToken('admin', (err, token) => {
@@ -281,9 +362,22 @@ describe('test that visiting each page with an admin token is handled gracefully
 
     test('check server response code for add product page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -307,11 +401,25 @@ describe('test that visiting each page with an admin token is handled gracefully
 
     test('check server response code for edit product page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testadminsession';
 
-        queries.insertToken(session_id, '1', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('admin2', 2, TRUE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
+
         // let session_id = '';
 
         // generator.generateToken('admin', (err, token) => {
@@ -338,9 +446,22 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for home page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -366,12 +487,24 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for create account page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
-
         // let session_id = '';
 
         // generator.generateToken('petlover123', (err, token) => {
@@ -392,12 +525,24 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for login page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
-
         // let session_id = '';
 
         // generator.generateToken('petlover123', (err, token) => {
@@ -418,9 +563,22 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for cart page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -444,9 +602,22 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for view product page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -470,12 +641,24 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for checkout page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
-
         // let session_id = '';
 
         // generator.generateToken('petlover123', (err, token) => {
@@ -496,9 +679,22 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for add product page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
 
@@ -522,12 +718,24 @@ describe('test that visiting each page with a non-admin token is handled gracefu
 
     test('check server response code for edit product page', async () => {
 
+        //await db.query("BEGIN;");
+
         const session_id = 'testnonadminsession';
 
-        queries.insertToken(session_id, '3', (err) => {
+        const res = await db.query(`
+        INSERT INTO account (username, password, is_admin, login_time)
+        VALUES ('testbabyaccount', 1, FALSE, NOW())
+        RETURNING user_id;
+        `);
+
+        const user_id = res.rows[0].user_id;
+        
+        // await db.query("ROLLBACK;");
+        // await db.query("BEGIN;");
+
+        queries.insertToken(session_id, user_id, (err) => {
             if (err) { console.error(err); }
         });
-
         // let session_id = '';
 
         // generator.generateToken('petlover123', (err, token) => {

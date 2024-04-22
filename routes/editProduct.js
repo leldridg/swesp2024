@@ -22,7 +22,7 @@ router.get('/:productId', (req, res, next) => {
       if (!exists) {
         res.send("invalid session token ):");
       }
-      if (!is_admin) {
+      else if (!is_admin) {
         // res.send("invalid session token - non admin user");
         res.redirect(`/view-product/${productId}?session=${token}`);
 
@@ -31,9 +31,9 @@ router.get('/:productId', (req, res, next) => {
           if (err) {
             return next(err);
           }
-          if (!item) {
+          else if (!item) {
             return res.status(404).send('Product not found');
-          }
+          } else {
 
           queries.viewChangeLog(productId, (err, result) => {
             if(err){
@@ -42,6 +42,7 @@ router.get('/:productId', (req, res, next) => {
             res.render('pages/edit-product', { item: item, productId: productId, token: token, admin: is_admin, change_log: result});
             
           });
+        }
         });
 
       }
@@ -57,7 +58,7 @@ router.post('/:id', (req, res, next) => {
     if (!exists) {
       res.send("invalid session token ):");
     }
-    if (!is_admin) {
+    else if (!is_admin) {
       res.send("non admin token ):");
       // res.redirect(`/view-product/${productId}?session=${token}`);
     } else {
@@ -78,8 +79,8 @@ router.post('/:id', (req, res, next) => {
               return next(err);
             }
           })
+          res.redirect(`/?session=${token}&message=${"edited successfully!"}`);
         }
-          res.redirect(`/?session=${token}&message=${"edited sucessfully!"}`);
         });
       }
     });
@@ -115,9 +116,9 @@ router.post('/:id/delete', (req, res, next) => {
             if(err){
               return next(err);
             }
-          })
+          });
+          res.redirect(`/?session=${token}&message=${"deleted successfully!"}`);
         }
-          res.redirect(`/?session=${token}&message=${"deleted sucessfully!"}`);
         });
       }
     });
