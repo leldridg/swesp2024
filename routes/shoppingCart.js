@@ -12,8 +12,9 @@ router.get('/', function (req, res, next) {
 
   token = req.query.session || null;
 
-  if(Object.keys(req.query).length === 0){
-    res.render('pages/cart', { title: 'welcome, guest user!', items: null, token: null, user_id: null});
+  if(token == null){
+    // res.render('pages/cart', { title: 'welcome, guest user!', items: {}, token: null, user_id: null});
+    res.redirect('/');
   } else {
     queries.uidFromSID(req.query.session, (err, exists, user_id) => {
       if (err) { return next(err); }
