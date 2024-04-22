@@ -35,6 +35,8 @@ function guestAccount(productId, quantity, callback) {
           // queries.uidFromSID(token, (err, exists, user_id) => {
           queries.idByUsername(username, (err, user_id) => {
             if (err) { return callback(err, null); }
+            if(quantity < 0) { return callback("Please have quantity atleast 1"); }
+
             queries.addItemToCart(user_id, productId, quantity, (err) => {
               if (err) {
                 console.log(err)

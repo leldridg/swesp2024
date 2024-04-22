@@ -61,6 +61,8 @@ router.post('/', function (req, res, next) {
       }
 
       if (exists) {
+        if(quantity < 0) { return res.status(400).send("Quantity should not be negative"); }
+
         queries.addItemToCart(user_id, productId, quantity, (err) => {
           if (err) {
             return next(err);

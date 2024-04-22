@@ -56,6 +56,7 @@ router.post('/delete-item', function (req, res) {
 
 router.post('/update-quantity', function(req, res) {
   const { quantity, uid, pid, token } = req.body; //get info from form
+  if(quantity < 0) { return res.status(400).send("Quantity should not be negative"); }
 
   queries.updateItemQuantityByUIDPID(uid, pid, quantity, (err) => {
     res.redirect(`/cart/?session=${token}`);

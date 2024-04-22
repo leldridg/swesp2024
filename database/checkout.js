@@ -9,6 +9,7 @@ function checkout(user_id, callback) {
             //console.log(item.product_id);
             queries.getProdQuantity(item.product_id, (err, quantity) => {
                 if (err) { return callback(err); }
+                if(quantity - item.quantity < 0) { return callback("Quantity should not be negative"); }
                 //update available quantity of product based on quantity in cart
                 queries.updateProdQuantity(item.product_id, quantity - item.quantity, (err) => {
                     if (err) { return callback(err); }
