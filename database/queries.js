@@ -38,6 +38,7 @@ function updateProdQuantity(product_id, quantity, callback) {
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }
+    callback(null);
   });
 }
 
@@ -106,7 +107,7 @@ function updateItemQuantityByUIDPID(user_id, product_id, quantity, callback) {
   db.query(sql, (err) => {
     if (err) {return callback(err); }
     callback(null);
-  })
+  });
 }
 
 // delete an item from cart_item based on item_id
@@ -119,7 +120,7 @@ function deleteItemByIID(item_id, callback) {
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }
-
+    callback(null);
   });
 }
 
@@ -133,6 +134,7 @@ function deleteItemByPID(product_id, callback) {
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }
+    callback(null);
   });
 }
 
@@ -168,6 +170,7 @@ function deleteProductByPID(product_id, callback) {
 
   db.query(sql, (err) => {
     if (err) { return callback(err); }
+    callback(null);
   });
 }
 
@@ -181,6 +184,7 @@ function deleteProdcatByPID(product_id, callback) {
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }
+    callback(null);
   });
 }
 
@@ -231,7 +235,7 @@ function createAccount(username, password, callback) {
     VALUES ('${username}', '${password}', FALSE, NOW());
     `
   db.query(sql, (err, result) => {
-    if (err) { return callback(err, null); }
+    if (err) { return callback(err); }
     callback(null);
   });
 }
@@ -297,6 +301,7 @@ function removeToken(user_id, callback) {
   `
   db.query(sql, (err) => {
     if (err) { return callback(err); }
+    callback(null);
   });
 }
 
